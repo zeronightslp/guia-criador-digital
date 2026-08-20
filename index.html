@@ -178,13 +178,13 @@
             <!-- Reader Main Workspace (Sidebar + Flipbook Reader) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-                <!-- Table of Contents Sidebar (3 cols on desktop) -->
+                <!-- Table of Contents Sidebar (4 cols on desktop) -->
                 <aside id="toc-sidebar" class="lg:col-span-4 glass-panel rounded-2xl p-4 flex flex-col max-h-[750px]">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
                         <h3 class="font-heading font-extrabold text-sm text-slate-100 flex items-center gap-2">
                             <i data-lucide="book" class="w-4 h-4 text-cyan-400"></i> Sumário do Livro
                         </h3>
-                        <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">81 Seções</span>
+                        <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">36 Capítulos</span>
                     </div>
 
                     <!-- Reading Progress Bar -->
@@ -215,7 +215,7 @@
                                     Módulo 1
                                 </span>
                                 <span id="reader-page-indicator" class="text-xs text-slate-400 font-mono">
-                                    Página 1 de 81
+                                    Capítulo 1 de 36
                                 </span>
                             </div>
 
@@ -355,49 +355,51 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
         let searchQuery = "";
 
         // Initialize Application
-        document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
             renderTOC();
             loadChapterByIdx(0);
 
             // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
+            document.addEventListener('keydown', function(e) {
                 if (e.target.tagName === 'INPUT') return;
                 if (e.key === 'ArrowRight') nextChapter();
                 if (e.key === 'ArrowLeft') prevChapter();
             });
         });
 
-        function renderTOC(filteredList = EBOOK_CHAPTERS) {
+        function renderTOC(filteredList) {
+            if (!filteredList) filteredList = EBOOK_CHAPTERS;
             const container = document.getElementById('toc-list');
-            document.getElementById('chapter-count-badge').innerText = `${filteredList.length} Seções`;
+            document.getElementById('chapter-count-badge').innerText = filteredList.length + ' Capítulos';
 
             if (filteredList.length === 0) {
-                container.innerHTML = `<div class="p-4 text-center text-xs text-slate-500">Nenhum capítulo encontrado para "${searchQuery}"</div>`;
+                container.innerHTML = '<div class="p-4 text-center text-xs text-slate-500">Nenhum capítulo encontrado para "' + searchQuery + '"</div>';
                 return;
             }
 
-            container.innerHTML = filteredList.map((ch, idx) => {
-                const originalIdx = EBOOK_CHAPTERS.findIndex(c => c.id === ch.id);
+            container.innerHTML = filteredList.map(function(ch) {
+                const originalIdx = EBOOK_CHAPTERS.findIndex(function(c) { return c.id === ch.id; });
                 const isActive = originalIdx === currentChapterIdx;
 
-                return `
-                    <button onclick="loadChapterByIdx(${originalIdx})" 
-                            class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 ${
-                                isActive 
-                                ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shadow-sm' 
-                                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent'
-                            }">
-                        <div class="truncate">
-                            <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">${ch.module}</span>
-                            <span class="truncate font-bold">${highlightMatch(ch.title, searchQuery)}</span>
-                        </div>
-                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
-                    </button>
-                `;
+                const activeClass = isActive 
+                    ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shadow-sm' 
+                    : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent';
+
+                return '<button onclick="loadChapterByIdx(' + originalIdx + ')" class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 ' + activeClass + '">' +
+                        '<div class="truncate">' +
+                            '<span class="text-[10px] text-slate-500 block font-mono font-normal truncate">' + ch.module + '</span>' +
+                            '<span class="truncate font-bold">' + highlightMatch(ch.title, searchQuery) + '</span>' +
+                        '</div>' +
+                        '<i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>' +
+                    '</button>';
             }).join('');
 
-            lucide.createIcons();
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         }
 
         function loadChapterByIdx(idx) {
@@ -406,32 +408,29 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             const ch = EBOOK_CHAPTERS[idx];
 
             document.getElementById('reader-module-badge').innerText = ch.module;
-            document.getElementById('reader-page-indicator').innerText = `Capítulo ${idx + 1} de ${EBOOK_CHAPTERS.length}`;
+            document.getElementById('reader-page-indicator').innerText = 'Capítulo ' + (idx + 1) + ' de ' + EBOOK_CHAPTERS.length;
 
             const box = document.getElementById('reader-content-box');
             box.classList.remove('page-flip-anim');
-            void box.offsetWidth; // Trigger reflow for animation
+            void box.offsetWidth;
             box.classList.add('page-flip-anim');
 
-            box.style.fontSize = `${fontScale * 1.0}rem`;
-            box.innerHTML = `
-                <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-white pb-3 border-b border-slate-800">${ch.title}</h2>
-                <div class="prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4">
-                    ${ch.html}
-                </div>
-            `;
+            box.style.fontSize = (fontScale * 1.0) + 'rem';
+            box.innerHTML = '<h2 class="font-heading font-extrabold text-xl sm:text-2xl text-white pb-3 border-b border-slate-800">' + ch.title + '</h2>' +
+                '<div class="prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4">' +
+                    ch.html +
+                '</div>';
 
-            // Scroll top of content box
             box.scrollTop = 0;
 
-            // Update Progress Bar
             const percent = Math.round(((idx + 1) / EBOOK_CHAPTERS.length) * 100);
-            document.getElementById('progress-percent').innerText = `${percent}%`;
-            document.getElementById('progress-bar-fill').style.width = `${percent}%`;
+            document.getElementById('progress-percent').innerText = percent + '%';
+            document.getElementById('progress-bar-fill').style.width = percent + '%';
 
-            // Re-render TOC to highlight active item
             renderTOC(filterChapters(searchQuery));
-            lucide.createIcons();
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         }
 
         function nextChapter() {
@@ -446,7 +445,6 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             }
         }
 
-        // Live Search Handling
         function handleSearch(query) {
             searchQuery = query.trim();
             const clearBtn = document.getElementById('clear-search-btn');
@@ -460,7 +458,7 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             renderTOC(filtered);
 
             if (filtered.length > 0 && searchQuery.length > 1) {
-                const firstMatchIdx = EBOOK_CHAPTERS.findIndex(c => c.id === filtered[0].id);
+                const firstMatchIdx = EBOOK_CHAPTERS.findIndex(function(c) { return c.id === filtered[0].id; });
                 loadChapterByIdx(firstMatchIdx);
             }
         }
@@ -473,23 +471,24 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
         function filterChapters(query) {
             if (!query) return EBOOK_CHAPTERS;
             const q = query.toLowerCase();
-            return EBOOK_CHAPTERS.filter(ch => 
-                ch.title.toLowerCase().includes(q) || 
-                ch.module.toLowerCase().includes(q) || 
-                ch.content.toLowerCase().includes(q)
-            );
+            return EBOOK_CHAPTERS.filter(function(ch) { 
+                return ch.title.toLowerCase().indexOf(q) !== -1 || 
+                       ch.module.toLowerCase().indexOf(q) !== -1 || 
+                       ch.content.toLowerCase().indexOf(q) !== -1;
+            });
         }
 
         function highlightMatch(text, query) {
             if (!query) return text;
-            const reg = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\]/g, '\\$&')})`, 'gi');
+            const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const reg = new RegExp('(' + escaped + ')', 'gi');
             return text.replace(reg, '<mark class="search-highlight">$1</mark>');
         }
 
         function adjustFontSize(delta) {
             if (delta > 0 && fontScale < 1.4) fontScale += 0.1;
             if (delta < 0 && fontScale > 0.8) fontScale -= 0.1;
-            document.getElementById('font-size-label').innerText = `${Math.round(fontScale * 100)}%`;
+            document.getElementById('font-size-label').innerText = Math.round(fontScale * 100) + '%';
             loadChapterByIdx(currentChapterIdx);
         }
 
@@ -503,8 +502,8 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
         }
 
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(el => {
+            document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.add('hidden'); });
+            document.querySelectorAll('.tab-btn').forEach(function(el) {
                 el.classList.remove('bg-slate-800', 'text-slate-100');
                 el.classList.add('text-slate-400');
             });
