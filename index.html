@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criador Digital Hub & Dashboard - R$35 Edition</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts & Lucide Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-effect {
+            box-shadow: 0 0 40px -10px rgba(56, 189, 248, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-white custom-scrollbar">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800 px-6 py-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20">
+                ⚡
+            </div>
+            <div>
+                <h1 class="font-extrabold text-slate-100 text-base leading-tight flex items-center gap-2">
+                    Criador Digital Hub <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-semibold">Oferta R$35 Ativa</span>
+                </h1>
+                <p class="text-xs text-slate-400">Plataforma Completa de Vendas & Leitura Master</p>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="hidden md:flex items-center gap-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800 text-sm font-medium">
+            <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn px-4 py-2 rounded-lg text-slate-100 bg-slate-800 shadow-sm flex items-center gap-2 transition-all">
+                <i data-lucide="layout-dashboard" class="w-4 h-4 text-cyan-400"></i> Dashboard
+            </button>
+            <button onclick="switchTab('reader')" id="tab-reader" class="tab-btn px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
+                <i data-lucide="book-open" class="w-4 h-4 text-indigo-400"></i> Leitor Master
+            </button>
+            <button onclick="switchTab('generator')" id="tab-generator" class="tab-btn px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
+                <i data-lucide="sparkles" class="w-4 h-4 text-rose-400"></i> Gerador de Ganchos
+            </button>
+            <button onclick="switchTab('github')" id="tab-github" class="tab-btn px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
+                <i data-lucide="github" class="w-4 h-4 text-slate-300"></i> GitHub Repo
+            </button>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            <a href="./LANDING_PAGE_OFERTA_35.html" target="_blank" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Ver Landing Page
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6">
+
+        <!-- TAB 1: DASHBOARD ANALYTICS -->
+        <section id="sec-dashboard" class="tab-content space-y-6">
+
+            <!-- Metrics Cards Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="glass-panel p-5 rounded-2xl relative overflow-hidden">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Faturamento Total</span>
+                        <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i data-lucide="dollar-sign" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white">R$ 4.235,00</div>
+                    <div class="mt-2 flex items-center gap-1.5 text-xs text-emerald-400 font-semibold">
+                        <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> +24.8% vs semana anterior
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl relative overflow-hidden">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Vendas (R$ 35,00)</span>
+                        <div class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400"><i data-lucide="shopping-cart" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white">121 Unidades</div>
+                    <div class="mt-2 flex items-center gap-1.5 text-xs text-cyan-400 font-semibold">
+                        <i data-lucide="zap" class="w-3.5 h-3.5"></i> Conversão Média: 5.2%
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl relative overflow-hidden">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Visitas no Funil</span>
+                        <div class="p-2 rounded-xl bg-indigo-500/10 text-indigo-400"><i data-lucide="users" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white">2.327 Clientes</div>
+                    <div class="mt-2 flex items-center gap-1.5 text-xs text-indigo-400 font-semibold">
+                        <i data-lucide="eye" class="w-3.5 h-3.5"></i> Tráfego Orgânico + Reels
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-2xl relative overflow-hidden">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider">ROI do Produto</span>
+                        <div class="p-2 rounded-xl bg-rose-500/10 text-rose-400"><i data-lucide="pie-chart" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="text-3xl font-extrabold text-white">680% ROI</div>
+                    <div class="mt-2 flex items-center gap-1.5 text-xs text-rose-400 font-semibold">
+                        <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Baixíssimo Custo por Aquisição
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Sales Chart & Live Activity -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Sales Velocity Visualizer -->
+                <div class="lg:col-span-2 glass-panel p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Desempenho Diário de Vendas</h3>
+                            <p class="text-xs text-slate-400">Volume de conversões do produto de R$ 35,00 nos últimos 7 dias</p>
+                        </div>
+                        <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-lg border border-slate-700 font-mono">Ao Vivo</span>
+                    </div>
+
+                    <!-- SVG Sales Graph -->
+                    <div class="h-56 w-full relative flex items-end">
+                        <svg class="w-full h-full overflow-visible" viewBox="0 0 500 180">
+                            <defs>
+                                <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.4"/>
+                                    <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Path Area -->
+                            <path d="M 0,140 Q 80,100 160,110 T 320,50 T 500,20 L 500,180 L 0,180 Z" fill="url(#grad)" />
+                            <!-- Stroke Line -->
+                            <path d="M 0,140 Q 80,100 160,110 T 320,50 T 500,20" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+                            <!-- Data Points -->
+                            <circle cx="80" cy="115" r="5" fill="#38bdf8" class="animate-ping" />
+                            <circle cx="80" cy="115" r="5" fill="#0284c7" />
+                            <circle cx="320" cy="50" r="5" fill="#38bdf8" />
+                            <circle cx="500" cy="20" r="6" fill="#10b981" />
+                        </svg>
+                    </div>
+
+                    <div class="flex justify-between text-xs text-slate-400 mt-4 border-t border-slate-800/80 pt-3">
+                        <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span class="text-emerald-400 font-bold">Hoje (+28 Vendas)</span>
+                    </div>
+                </div>
+
+                <!-- Recent Order Activity -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">Últimas Vendas Aprovadas</h3>
+                        <p class="text-xs text-slate-400 mb-4">Atualizações em tempo real das compras efetuadas</p>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">PIX</div>
+                                    <div>
+                                        <div class="font-bold text-slate-200">Lucas M.</div>
+                                        <div class="text-slate-500">Há 3 minutos</div>
+                                    </div>
+                                </div>
+                                <span class="font-extrabold text-emerald-400">+ R$ 35,00</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold">CC</div>
+                                    <div>
+                                        <div class="font-bold text-slate-200">Beatriz R.</div>
+                                        <div class="text-slate-500">Há 14 minutos</div>
+                                    </div>
+                                </div>
+                                <span class="font-extrabold text-emerald-400">+ R$ 35,00</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">PIX</div>
+                                    <div>
+                                        <div class="font-bold text-slate-200">Gabriel C.</div>
+                                        <div class="text-slate-500">Há 32 minutos</div>
+                                    </div>
+                                </div>
+                                <span class="font-extrabold text-emerald-400">+ R$ 35,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_35REAIS.html" target="_blank" class="w-full mt-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all">
+                        <i data-lucide="download" class="w-4 h-4"></i> Baixar E-book Master Completo
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: E-BOOK READER MODULE -->
+        <section id="sec-reader" class="tab-content hidden space-y-6">
+            <div class="glass-panel rounded-2xl p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Chapter Selector Sidebar -->
+                <div class="space-y-2 border-r border-slate-800 pr-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Módulos do Produto</h3>
+
+                    <button onclick="loadChapter(1)" class="chap-btn w-full text-left p-3 rounded-xl text-xs font-semibold bg-slate-800 text-cyan-400 border border-slate-700 flex items-center justify-between">
+                        <span>Módulo 1: Fundamentos</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="loadChapter(2)" class="chap-btn w-full text-left p-3 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900 flex items-center justify-between">
+                        <span>Módulo 2: Monetização</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="loadChapter(3)" class="chap-btn w-full text-left p-3 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900 flex items-center justify-between">
+                        <span>Módulo 3: Crescimento & Reels</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="loadChapter(4)" class="chap-btn w-full text-left p-3 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900 flex items-center justify-between">
+                        <span>Módulo 4: Recursos & Templates</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="loadChapter(5)" class="chap-btn w-full text-left p-3 rounded-xl text-xs font-semibold text-slate-400 hover:bg-slate-900 flex items-center justify-between">
+                        <span>Módulo 5: Bônus Exclusivos</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Chapter Reader Content Display -->
+                <div id="reader-body" class="md:col-span-3 space-y-4 text-slate-300 text-sm leading-relaxed max-h-[550px] overflow-y-auto pr-2 custom-scrollbar">
+                    <h2 class="text-xl font-bold text-white border-b border-slate-800 pb-2">Módulo 1: Fundamentos dos Produtos Digitais</h2>
+                    <p class="text-slate-400">Um produto digital é um ativo vendido online sem necessidade de estoque ou frete. Oferece margem líquida acima de 90% e escalabilidade infinita.</p>
+                    
+                    <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 space-y-2">
+                        <h4 class="font-bold text-cyan-400">Principais Pilares:</h4>
+                        <ul class="list-disc list-inside text-xs space-y-1 text-slate-300">
+                            <li>Baixíssimo custo operacional de criação</li>
+                            <li>Automação total no recebimento via PIX e Cartão</li>
+                            <li>Entrega imediata por e-mail no momento da compra</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: REELS HOOK & COPY GENERATOR -->
+        <section id="sec-generator" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl max-w-3xl mx-auto space-y-6">
+                <div>
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-rose-400"></i> Gerador Instantâneo de Ganchos Virais
+                    </h3>
+                    <p class="text-xs text-slate-400">Selecione seu objetivo para gerar um script de alta retenção para o Instagram</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <select id="niche-select" class="bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-xl p-3 flex-1 font-semibold focus:outline-none focus:border-cyan-500">
+                        <option>Curiosidade (Alta Retenção)</option>
+                        <option>Controvérsia Negativa</option>
+                        <option>FOMO (Medo de Perder)</option>
+                        <option>CTA de Venda Direta R$35</option>
+                    </select>
+
+                    <button onclick="generateHook()" class="bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-lg flex items-center gap-2">
+                        <i data-lucide="zap" class="w-4 h-4"></i> Gerar Gancho
+                    </button>
+                </div>
+
+                <div id="hook-output" class="bg-slate-900/90 border border-slate-800 p-5 rounded-xl font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed">
+Clique em "Gerar Gancho" para obter um script otimizado de 7 segundos para o seu produto!
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: GITHUB REPOSITORY CONFIGURATION -->
+        <section id="sec-github" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl max-w-3xl mx-auto space-y-6">
+                <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+                    <div class="p-3 rounded-xl bg-slate-800 text-white"><i data-lucide="github" class="w-6 h-6"></i></div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Repositório GitHub do Projeto</h3>
+                        <p class="text-xs text-slate-400">Instruções para subir este projeto completo para o seu GitHub público ou privado</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="text-sm font-bold text-slate-200">Comandos para Execução no Terminal:</h4>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs font-mono text-cyan-400 space-y-2 overflow-x-auto">
+                        <p class="text-slate-500"># 1. Adicionar todos os arquivos e commit inicial</p>
+                        <p>git add .</p>
+                        <p>git commit -m "feat: initial commit for Criador Digital Master Product R$35"</p>
+                        <br>
+                        <p class="text-slate-500"># 2. Conectar ao seu repositório no GitHub</p>
+                        <p>git remote add origin https://github.com/SEU_USUARIO/guia-criador-digital.git</p>
+                        <p>git branch -M main</p>
+                        <p>git push -u origin main</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Script Navigation & Actions -->
+    <script>
+        lucide.createIcons();
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-slate-800', 'text-slate-100');
+                el.classList.add('text-slate-400');
+            });
+
+            document.getElementById('sec-' + tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('bg-slate-800', 'text-slate-100');
+            activeBtn.classList.remove('text-slate-400');
+        }
+
+        const hooks = [
+            "🚨 'Pare de tentar vender produtos físicos se você não quer se estressar com frete. Este e-book de R$ 35,00 me gerou R$ 4.200 em 7 dias.' (Leia a legenda)",
+            "⚠️ 'Este erro simples ao postar Reels está destruindo o seu alcance no Instagram...' (Comente 'GUIA' para receber o PDF completo por R$ 35)",
+            "💡 'A estrutura exata de 3 linhas na bio do Instagram que converte visitantes em clientes fiéis. Salve esse vídeo!'",
+            "🔥 'Se você tem 1 hora por dia livre e acesso à internet, esta é a forma mais barata de construir seu produto digital.'"
+        ];
+
+        function generateHook() {
+            const randomHook = hooks[Math.floor(Math.random() * hooks.length)];
+            document.getElementById('hook-output').innerText = randomHook;
+        }
+
+        function loadChapter(num) {
+            const body = document.getElementById('reader-body');
+            const chapters = {
+                1: '<h2 class="text-xl font-bold text-white border-b border-slate-800 pb-2">Módulo 1: Fundamentos dos Produtos Digitais</h2><p class="text-slate-400">Conceitos fundamentais da economia criativa e produtos de alta margem.</p>',
+                2: '<h2 class="text-xl font-bold text-white border-b border-slate-800 pb-2">Módulo 2: Modelos de Monetização</h2><p class="text-slate-400">As 6 formas testadas de gerar caixa direto com e-books de R$ 35 e funis diretos.</p>',
+                3: '<h2 class="text-xl font-bold text-white border-b border-slate-800 pb-2">Módulo 3: Crescimento e Reels Virais</h2><p class="text-slate-400">Engenharia reversa de ganchos virais e retenção nos primeiros 3 segundos.</p>',
+                4: '<h2 class="text-xl font-bold text-white border-b border-slate-800 pb-2">Módulo 4: Kit de Recursos & Templates</h2><p class="text-slate-400">Links de Presets do Lightroom, Templates do Notion e modelos de páginas.</p>',
+                5: '<h2 class="text-xl font-bold text-white border-b border-slate-800 pb-2">Módulo 5: Bônus Exclusivos</h2><p class="text-slate-400">Matriz de ideias infinitas e suite de ferramentas de automação.</p>'
+            };
+            body.innerHTML = chapters[num] || chapters[1];
+        }
+    </script>
+</body>
+</html>
