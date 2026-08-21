@@ -7,7 +7,7 @@ Atenção futuros criadores, esta parte é crucial, então prestem atenção. Co
 
 Vamos primeiro focar na qualidade de seu conteúdo.
 
-"Por que isso importa, Ninja?"
+"Por que isso importa, João Lucas?"
 
 Isso importa MUITO.
 

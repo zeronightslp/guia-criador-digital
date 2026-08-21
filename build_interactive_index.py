@@ -129,10 +129,6 @@ index_html_content = f"""<!DOCTYPE html>
             <button onclick="switchTab('pdf')" id="tab-pdf" class="tab-btn px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
                 <i data-lucide="file-text" class="w-4 h-4 text-indigo-400"></i> Visualizador PDF
             </button>
-
-            <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
-                <i data-lucide="layout-dashboard" class="w-4 h-4 text-emerald-400"></i> Dashboard R$35
-            </button>
             <button onclick="switchTab('generator')" id="tab-generator" class="tab-btn px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
                 <i data-lucide="sparkles" class="w-4 h-4 text-rose-400"></i> Gerador de Ganchos
             </button>
@@ -141,7 +137,10 @@ index_html_content = f"""<!DOCTYPE html>
         <!-- Right Quick Actions -->
         <div class="flex items-center gap-2">
             <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" download class="flex items-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md">
-                <i data-lucide="download" class="w-4 h-4"></i> <span class="hidden sm:inline">Baixar PDF</span>
+                <i data-lucide="download" class="w-4 h-4"></i> <span class="hidden sm:inline">Baixar PDF Master</span>
+            </a>
+            <a href="./ESTRUTURA_AQUECIMENTO_ORGANICO.pdf" download class="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-extrabold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md" title="Baixar E-Book Bônus: Estrutura Aquecimento Orgânico">
+                <i data-lucide="flame" class="w-4 h-4"></i> <span class="hidden sm:inline">E-book Aquecimento</span>
             </a>
             <a href="./LANDING_PAGE_OFERTA_35.html" target="_blank" class="hidden sm:flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold px-3 py-2.5 rounded-xl border border-slate-700 transition-all">
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Landing Page
@@ -283,47 +282,6 @@ index_html_content = f"""<!DOCTYPE html>
 
             <div class="glass-panel rounded-2xl overflow-hidden h-[750px] border border-slate-800">
                 <iframe src="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" class="w-full h-full border-0"></iframe>
-            </div>
-        </section>
-
-        <!-- TAB 3: DASHBOARD METRICS -->
-        <section id="sec-dashboard" class="tab-content hidden space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <div class="glass-panel p-5 rounded-2xl">
-                    <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-xs font-semibold uppercase">Faturamento R$35</span>
-                        <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i data-lucide="dollar-sign" class="w-5 h-5"></i></div>
-                    </div>
-                    <div class="text-3xl font-extrabold text-white">R$ 4.235,00</div>
-                    <div class="mt-2 text-xs text-emerald-400 font-semibold">+24.8% este mês</div>
-                </div>
-
-                <div class="glass-panel p-5 rounded-2xl">
-                    <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-xs font-semibold uppercase">Vendas Aprovadas</span>
-                        <div class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400"><i data-lucide="shopping-cart" class="w-5 h-5"></i></div>
-                    </div>
-                    <div class="text-3xl font-extrabold text-white">121 E-books</div>
-                    <div class="mt-2 text-xs text-cyan-400 font-semibold">Conversão: 5.2%</div>
-                </div>
-
-                <div class="glass-panel p-5 rounded-2xl">
-                    <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-xs font-semibold uppercase">Visitas no Funil</span>
-                        <div class="p-2 rounded-xl bg-indigo-500/10 text-indigo-400"><i data-lucide="users" class="w-5 h-5"></i></div>
-                    </div>
-                    <div class="text-3xl font-extrabold text-white">2.327 Clientes</div>
-                    <div class="mt-2 text-xs text-indigo-400 font-semibold">Orgânico + Instagram</div>
-                </div>
-
-                <div class="glass-panel p-5 rounded-2xl">
-                    <div class="flex items-center justify-between text-slate-400 mb-2">
-                        <span class="text-xs font-semibold uppercase">ROI Estimado</span>
-                        <div class="p-2 rounded-xl bg-rose-500/10 text-rose-400"><i data-lucide="pie-chart" class="w-5 h-5"></i></div>
-                    </div>
-                    <div class="text-3xl font-extrabold text-white">680% ROI</div>
-                    <div class="mt-2 text-xs text-rose-400 font-semibold">Zero custo de estoque</div>
-                </div>
             </div>
         </section>
 

@@ -3,36 +3,40 @@
 feito: No
 Description: Encontrando áudios Em Alta
 
-**Harnessing the Power of Audio on Instagram**
+# 9. Áudios Virais
 
-While audio can certainly enhance your content, it's important to recognize that it's not a one-size-fits-all solution. However, integrating viral audio tracks into your content can significantly boost your chances of gaining traction.
+feito: No
+Description: Encontrando áudios Em Alta
 
-**Why Pursue Viral Audio Tracks?**
+**Aproveitando o Poder do Áudio no Instagram**
 
-Instagram tends to prioritize content featuring specific sounds, especially if they resonate with your niche. When audios go viral, a multitude of users engage with them, exploring additional reels and potentially stumbling upon your content in the process.
+Embora o áudio possa certamente aprimorar seu conteúdo, é importante reconhecer que não é uma solução única para tudo. No entanto, integrar faixas de áudio virais ao seu conteúdo pode aumentar significativamente suas chances de ganhar tração.
 
-Now, how do you discover these viral audios? Here are a few strategies:
+**Por Que Buscar Faixas de Áudio Virais?**
 
-1. **Tap into Growth Communities:** Some individuals sharing Instagram growth tips also divulge insights into trending sounds.
-2. **Feed Exploration:** Scroll through your feed and take note of any audio used across multiple reels. Click on the audio to gauge its popularity.
-3. **Criteria for Viral Potential:**
-    - Aim for audios with fewer than 100k reels, indicating growth potential.
-    - Look for audios experiencing a surge in usage, suggesting potential virality.
-    - 
+O Instagram tende a priorizar conteúdos que apresentem sons específicos, especialmente se eles ressoarem com seu nicho. Quando os áudios viralizam, uma multidão de usuários interage com eles, explorando reels adicionais e potencialmente encontrando seu conteúdo no processo.
 
-In essence, viral audio tracks are those frequently utilized, making them a common occurrence as you scroll through your feed. Discovering these audios is straightforward: scroll, identify recurring audios, and seamlessly incorporate them into your content.
+Agora, como você descobre esses áudios virais? Aqui estão algumas estratégias:
 
-**Spotting Trending Audios in the Reels Category**
+1. **Aproveite Comunidades de Crescimento:** Algumas pessoas que compartilham dicas de crescimento no Instagram também divulgam insights sobre sons em alta.
+2. **Exploração do Feed:** Role pelo seu feed e tome nota de qualquer áudio usado em múltiplos reels. Clique no áudio para avaliar sua popularidade.
+3. **Critérios para Potencial Viral:**
+    - Busque áudios com menos de 100 mil reels, indicando potencial de crescimento.
+    - Procure por áudios que estejam enfrentando um aumento rápido de uso, sugerindo potencial viral.
 
-If you're scouring through the reels category in search of viral sounds, keep an eye out for the up arrow icon located at the bottom left of the screen. This icon indicates that the audio is currently trending.
+Em essência, faixas de áudio virais são aquelas frequentemente utilizadas, tornando-se uma ocorrência comum enquanto você rola pelo seu feed. Descobrir esses áudios é simples: role, identifique áudios recorrentes e incorpore-os perfeitamente ao seu conteúdo.
+
+**Identificando Áudios em Alta na Categoria de Reels**
+
+Se você está procurando na categoria de reels em busca de sons virais, fique atento ao ícone de seta para cima localizado no canto inferior esquerdo da tela. Este ícone indica que o áudio está em alta no momento.
 
 ![](9%20%C3%81udios%20Virais/Untitled.png)
 
-By following these strategies, you can effectively leverage the power of audio to enhance your Instagram presence and engage with a wider audience.
+Seguindo essas estratégias, você pode alavancar efetivamente o poder do áudio para aprimorar sua presença no Instagram e engajar com um público mais amplo.
 
 <aside>
-<img src="https://app.notion.com/icons/arrow-down-basic_gray.svg" alt="https://app.notion.com/icons/arrow-down-basic_gray.svg" width="40px" /> Instructional Video: Finding Trending Audios
+<img src="https://app.notion.com/icons/arrow-down-basic_gray.svg" alt="https://app.notion.com/icons/arrow-down-basic_gray.svg" width="40px" /> Vídeo Instrucional: Como Encontrar Áudios em Alta
 
 </aside>
 
-[https://www.loom.com/share/bc4119035a7c4b4db4b141c886aeffce?sid=3b2a1558-565b-4ccc-bdd4-e396b6d65d61](https://www.loom.com/share/bc4119035a7c4b4db4b141c886aeffce?sid=3b2a1558-565b-4ccc-bdd4-e396b6d65d61)
+[Assista ao Vídeo Instrucional no Loom](https://www.loom.com/share/bc4119035a7c4b4db4b141c886aeffce?sid=3b2a1558-565b-4ccc-bdd4-e396b6d65d61)

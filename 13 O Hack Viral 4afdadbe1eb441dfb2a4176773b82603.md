@@ -11,4 +11,4 @@ Dê uma pequena alteração — modifique os visuais ou ajuste o gancho que voc�
 
 Por que esse método funciona? Bem, aqui está a explicação: normalmente, apenas uma pequena parte dos seus seguidores vê seu reel inicialmente, e então ele é exposto a indivíduos que ainda não estão te seguindo.
 
-Portanto, quando você repostar, há chances de que alguns dos seus próprios seguidores nem percebam. É como um movimento ninja inteligente para extrair todo o potencial do seu conteúdo excepcional. Não subestime essa técnica — ela é um divisor de águas.
+Portanto, quando você repostar, há chances de que alguns dos seus próprios seguidores nem percebam. É como um movimento estratégico e inteligente de @joaolucas.slp para extrair todo o potencial do seu conteúdo excepcional. Não subestime essa técnica — ela é um divisor de águas.

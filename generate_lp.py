@@ -47,6 +47,9 @@ landing_html = """<!DOCTYPE html>
                     <span class="text-emerald-400 text-lg">✓</span> 5 Módulos Master Práticos (31 Capítulos)
                 </div>
                 <div class="flex items-center gap-3 text-slate-200 font-semibold text-sm">
+                    <span class="text-emerald-400 text-lg">✓</span> 🎬 Pack Virais de Filmes & ✂️ Pack de Edição (Google Drive)
+                </div>
+                <div class="flex items-center gap-3 text-slate-200 font-semibold text-sm">
                     <span class="text-emerald-400 text-lg">✓</span> Pack com +900 Ganchos Virais para Reels
                 </div>
                 <div class="flex items-center gap-3 text-slate-200 font-semibold text-sm">

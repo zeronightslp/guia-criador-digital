@@ -17,7 +17,12 @@ Eu sei o quanto é difícil construir uma audiência no Instagram. E foi justame
 </aside>
 
 <aside>
-<img src="https://app.notion.com/icons/gift_yellow.svg" alt="https://app.notion.com/icons/gift_yellow.svg" width="40px" /> BÔNUS: Pasta Com Cortes Virais → [Acessar agora!](https://app.notion.com/p/V-deos-para-Perfil-Dark-b90aed4d833940bbba208b354e1fb7ad?pvs=21)
+<img src="https://app.notion.com/icons/gift_yellow.svg" alt="https://app.notion.com/icons/gift_yellow.svg" width="40px" /> 🎬 **BÔNUS: Pack Virais de Filmes** → [Acessar Pasta no Drive](https://drive.google.com/drive/folders/1p8ITT6kZtKzjh3TtNNZwU6kxgwCYU4yB)
+
+</aside>
+
+<aside>
+<img src="https://app.notion.com/icons/movie-clapboard-play_yellow.svg" alt="https://app.notion.com/icons/movie-clapboard-play_yellow.svg" width="40px" /> ✂️ **BÔNUS: Pack de Edição Profissional** → [Acessar Pasta no Drive](https://drive.google.com/drive/folders/1GZy-pXvrxVjXgIyKlJToM-kcJo9s26sb)
 
 </aside>
 
@@ -74,6 +79,6 @@ Conecte-se comigo! →  [Siga minha jornada no Instagram](https://www.instagram.
 </aside>
 
 <aside>
-<img src="https://app.notion.com/icons/movie-clapboard-play_yellow.svg" alt="https://app.notion.com/icons/movie-clapboard-play_yellow.svg" width="40px" /> Quer acesso aos vídeos que eu uso? →  [Adquira meu pack de vídeos](https://app.notion.com/p/V-deos-para-Perfil-Dark-b90aed4d833940bbba208b354e1fb7ad?pvs=21)
+<img src="https://app.notion.com/icons/movie-clapboard-play_yellow.svg" alt="https://app.notion.com/icons/movie-clapboard-play_yellow.svg" width="40px" /> 🎬 **Pack Virais de Filmes & ✂️ Pack de Edição** → [Acessar Pack de Filmes](https://drive.google.com/drive/folders/1p8ITT6kZtKzjh3TtNNZwU6kxgwCYU4yB) | [Acessar Pack de Edição](https://drive.google.com/drive/folders/1GZy-pXvrxVjXgIyKlJToM-kcJo9s26sb)
 
 </aside>
