@@ -185,8 +185,10 @@
 
         window.highlightMatch = function(text, query) {
             if (!query) return text;
-            const reg = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\]/g, '\\$&') + ')', 'gi');
-            return text.replace(reg, '<mark class="search-highlight">$1</mark>');
+            var q = query.toLowerCase();
+            var idx = text.toLowerCase().indexOf(q);
+            if (idx === -1) return text;
+            return text.substring(0, idx) + '<mark class="search-highlight">' + text.substring(idx, idx + query.length) + '</mark>' + text.substring(idx + query.length);
         };
 
         window.filterChapters = function(query) {
