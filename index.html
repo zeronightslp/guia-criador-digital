@@ -206,7 +206,7 @@
                         <h3 class="font-heading font-extrabold text-sm text-slate-100 flex items-center gap-2">
                             <i data-lucide="book" class="w-4 h-4 text-cyan-400"></i> Sumário do Livro
                         </h3>
-                        <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">-- Seções</span>
+                        <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">38 Seções</span>
                     </div>
 
                     <!-- Reading Progress Bar -->
@@ -220,9 +220,351 @@
                         </div>
                     </div>
 
-                    <!-- Filterable List of Chapters -->
+                    <!-- Filterable List of Chapters (Pre-rendered for instant visibility) -->
                     <div id="toc-list" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar pr-1">
-                        <!-- Populated by JavaScript -->
+                        
+        <button onclick="loadChapterByIdx(0)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shadow-sm">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">Módulo 1: Fundamentos dos Produtos Digitais</span>
+                <span class="truncate font-bold">⚡ Guia Definitivo do Criador Digital</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(1)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">Módulo 1: Fundamentos dos Produtos Digitais</span>
+                <span class="truncate font-bold">📋 SUMÁRIO DO PRODUTO</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(2)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 1: FUNDAMENTOS DOS PRODUTOS DIGITAIS</span>
+                <span class="truncate font-bold">MÓDULO 1: FUNDAMENTOS DOS PRODUTOS DIGITAIS</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(3)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 1: FUNDAMENTOS DOS PRODUTOS DIGITAIS</span>
+                <span class="truncate font-bold">2. As 10 Vantagens Brutais dos Produtos Digitais</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(4)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 1: FUNDAMENTOS DOS PRODUTOS DIGITAIS</span>
+                <span class="truncate font-bold">3. Os 10 Nichos Mais Lucrativos</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(5)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 1: FUNDAMENTOS DOS PRODUTOS DIGITAIS</span>
+                <span class="truncate font-bold">Top 10 Digital Products</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(6)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 1: FUNDAMENTOS DOS PRODUTOS DIGITAIS</span>
+                <span class="truncate font-bold">Lance Seu Primeiro Produto Digital Lucrativo!</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(7)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 2: MODELOS DE MONETIZAÇÃO & VENDAS</span>
+                <span class="truncate font-bold">Métodos de Monetização</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(8)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 2: MODELOS DE MONETIZAÇÃO & VENDAS</span>
+                <span class="truncate font-bold">Melhor Forma de Monetizar</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(9)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">1 Encontrando seu Nicho</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(10)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">2 Página Temática Ou Marca Pessoal</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(11)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">3 Estruturando o seu Perfil</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(12)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">4 Aquecendo sua conta</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(13)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">5 Sua Identidade</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(14)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">1.1 Marca do perfil</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(15)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">1.2 Marca de conteúdo</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(16)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">6 Captura de conteúdo</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(17)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">Finalmente, a estrutura do reel. Seu reel deve ter:</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(18)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">**Criando Seu Conteúdo:**</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(19)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">7 Ganchos</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(20)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">8 Retenção + Engajamento</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(21)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">9 Áudios Virais</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(22)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">10 Hashtags</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(23)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">11 Melhores Horários pra Postar</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(24)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">12 Consistência</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(25)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">13 O Hack Viral</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(26)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 3: CRESCIMENTO E ENGAJAMENTO NO INSTAGRAM</span>
+                <span class="truncate font-bold">14 Legendas</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(27)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 4: KIT DE RECURSOS & TEMPLATES</span>
+                <span class="truncate font-bold">1 Templates Notion</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(28)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 4: KIT DE RECURSOS & TEMPLATES</span>
+                <span class="truncate font-bold">2 Cursos Onlines</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(29)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 4: KIT DE RECURSOS & TEMPLATES</span>
+                <span class="truncate font-bold">3 Ebooks</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(30)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 4: KIT DE RECURSOS & TEMPLATES</span>
+                <span class="truncate font-bold">4 Fotos Licenciadas</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(31)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 4: KIT DE RECURSOS & TEMPLATES</span>
+                <span class="truncate font-bold">5 Presets no Lightroom</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(32)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 4: KIT DE RECURSOS & TEMPLATES</span>
+                <span class="truncate font-bold">7 Templates de sites 🎁</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(33)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 4: KIT DE RECURSOS & TEMPLATES</span>
+                <span class="truncate font-bold">8 Webinars Consultorias</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(34)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 5: BÔNUS EXCLUSIVOS</span>
+                <span class="truncate font-bold">BÔNUS Como ter Ideias Infinitas</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(35)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 5: BÔNUS EXCLUSIVOS</span>
+                <span class="truncate font-bold">BÔNUS Ferramentas Essênciais</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(36)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 5: BÔNUS EXCLUSIVOS</span>
+                <span class="truncate font-bold">BÔNUS Pack Virais de Filmes</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
+        <button onclick="loadChapterByIdx(37)" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">MÓDULO 5: BÔNUS EXCLUSIVOS</span>
+                <span class="truncate font-bold">BÔNUS Pack de Edição</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    
                     </div>
                 </aside>
 
@@ -234,10 +576,10 @@
                         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80 mb-6">
                             <div class="flex items-center gap-2">
                                 <span id="reader-module-badge" class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full font-bold">
-                                    Módulo 1
+                                    Módulo 1: Fundamentos dos Produtos Digitais
                                 </span>
                                 <span id="reader-page-indicator" class="text-xs text-slate-400 font-mono">
-                                    Capítulo 1 de 1
+                                    Capítulo 1 de 38
                                 </span>
                             </div>
 
@@ -252,9 +594,14 @@
                             </div>
                         </div>
 
-                        <!-- Rendered Chapter Content -->
+                        <!-- Rendered Chapter Content (Pre-rendered Chapter 0 for instant load) -->
                         <div id="reader-content-box" class="page-flip-anim space-y-4 max-h-[500px] overflow-y-auto pr-3 custom-scrollbar text-base">
-                            <!-- Populated dynamically -->
+                            
+    <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-white pb-3 border-b border-slate-800">⚡ Guia Definitivo do Criador Digital</h2>
+    <div class="prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4">
+        <blockquote class="border-l-4 border-cyan-500 pl-4 py-2 my-3 italic text-slate-300 bg-slate-900/60 rounded-r-xl"><strong>O Manual de Ação Prático para Criar, Crescer e Monetizar no Instagram do Zero.</strong></blockquote><blockquote class="border-l-4 border-cyan-500 pl-4 py-2 my-3 italic text-slate-300 bg-slate-900/60 rounded-r-xl"><em>Preço Sugerido de Venda: R$ 35,00 (Oferta de Entrada de Alta Conversão)</em></blockquote><hr class="my-5 border-slate-800"/><h3 class="font-heading text-base sm:text-lg font-semibold text-amber-300 mt-4 mb-2">🛡️ O QUE ESTÁ INCLUSO NESTE PACOTE:</h3><ul class="my-3 space-y-1.5 bg-slate-900/40 p-3.5 rounded-xl border border-slate-800/80"><li class="ml-4 list-disc text-slate-300 text-sm leading-relaxed">📖 <strong>Manual Master:</strong> 5 Módulos e 31 Capítulos Práticos de Execução Imediata</li><li class="ml-4 list-disc text-slate-300 text-sm leading-relaxed">🎯 <strong>Checklist de Implementação:</strong> Passo a passo para os primeiros R$ 1.000,00 online</li><li class="ml-4 list-disc text-slate-300 text-sm leading-relaxed">🎁 <strong>Kit Bônus Exclusivo:</strong> Links de Presets, Templates Notion, Scripts de Ganchos e Banco de Vídeos Virais</li></ul><hr class="my-5 border-slate-800"/><h1 class="font-heading text-xl sm:text-2xl font-bold text-white mt-6 mb-3 pb-2 border-b border-slate-800">🚀 MEGA PACK & MASTERCLASS: O GUIA DO CRIADOR DIGITAL COMPLETO</h1><blockquote class="border-l-4 border-cyan-500 pl-4 py-2 my-3 italic text-slate-300 bg-slate-900/60 rounded-r-xl"><strong>Produto Digital de Alto Valor</strong> — Compilado Master com Todos os Módulos, Guias, Templates e Bônus.</blockquote><hr class="my-5 border-slate-800"/>
+    </div>
+
                         </div>
                     </div>
 
@@ -357,7 +704,7 @@
 
                 <div class="relative">
                     <div id="hook-output" class="bg-slate-900/90 border border-slate-800 p-5 rounded-xl font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[100px] flex items-center">
-Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
+🚨 'Pare de tentar vender produtos físicos se você não quer se estressar com frete. Este e-book de R$ 35,00 me gerou R$ 4.200 em 7 dias.' (Leia a legenda)
                     </div>
                     <button onclick="copyHookToClipboard()" id="btn-copy-hook" class="absolute right-3 bottom-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all border border-slate-700">
                         <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Script
@@ -388,8 +735,7 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             }
         }
 
-        // Initialize Application
-        document.addEventListener('DOMContentLoaded', () => {
+        function initApp() {
             safeCreateIcons();
             renderTOC();
             loadChapterByIdx(0);
@@ -404,11 +750,19 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
 
             // Keyboard navigation
             document.addEventListener('keydown', (e) => {
-                if (e.target.tagName === 'INPUT') return;
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
                 if (e.key === 'ArrowRight') nextChapter();
                 if (e.key === 'ArrowLeft') prevChapter();
             });
-        });
+        }
+
+        // Guaranteed Initialization on all load states
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(initApp, 1);
+        } else {
+            document.addEventListener('DOMContentLoaded', initApp);
+            window.addEventListener('load', initApp);
+        }
 
         // Book Switcher Logic
         function selectBook(bookKey) {
@@ -666,6 +1020,7 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
                 activeBtn.classList.add('bg-slate-800', 'text-slate-100');
                 activeBtn.classList.remove('text-slate-400');
             }
+            safeCreateIcons();
         }
 
         function toggleSidebar() {

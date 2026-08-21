@@ -9,6 +9,33 @@ with open(json_path, "r", encoding="utf-8") as f:
 
 json_str = json.dumps(all_books, ensure_ascii=False)
 
+# Pre-render initial TOC and Chapter 0 for instant SSR/no-JS display
+master_chapters = all_books.get("master_guide", [])
+initial_toc_items = []
+for idx, ch in enumerate(master_chapters):
+    is_active = idx == 0
+    active_cls = "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shadow-sm" if is_active else "text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent"
+    initial_toc_items.append(f"""
+        <button onclick="loadChapterByIdx({idx})" 
+                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 {active_cls}">
+            <div class="truncate">
+                <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">{ch.get('module', '')}</span>
+                <span class="truncate font-bold">{ch.get('title', '')}</span>
+            </div>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 opacity-50"></i>
+        </button>
+    """)
+
+initial_toc_html = "".join(initial_toc_items)
+initial_chapter = master_chapters[0] if master_chapters else {"title": "Carregando...", "html": "<p>Carregando conteúdo...</p>", "module": "Módulo 1"}
+
+initial_content_html = f"""
+    <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-white pb-3 border-b border-slate-800">{initial_chapter.get('title', '')}</h2>
+    <div class="prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4">
+        {initial_chapter.get('html', '')}
+    </div>
+"""
+
 index_html_content = f"""<!DOCTYPE html>
 <html lang="pt-BR" class="dark">
 <head>
@@ -217,7 +244,7 @@ index_html_content = f"""<!DOCTYPE html>
                         <h3 class="font-heading font-extrabold text-sm text-slate-100 flex items-center gap-2">
                             <i data-lucide="book" class="w-4 h-4 text-cyan-400"></i> Sumário do Livro
                         </h3>
-                        <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">-- Seções</span>
+                        <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">{len(master_chapters)} Seções</span>
                     </div>
 
                     <!-- Reading Progress Bar -->
@@ -231,9 +258,9 @@ index_html_content = f"""<!DOCTYPE html>
                         </div>
                     </div>
 
-                    <!-- Filterable List of Chapters -->
+                    <!-- Filterable List of Chapters (Pre-rendered for instant visibility) -->
                     <div id="toc-list" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar pr-1">
-                        <!-- Populated by JavaScript -->
+                        {initial_toc_html}
                     </div>
                 </aside>
 
@@ -245,10 +272,10 @@ index_html_content = f"""<!DOCTYPE html>
                         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80 mb-6">
                             <div class="flex items-center gap-2">
                                 <span id="reader-module-badge" class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full font-bold">
-                                    Módulo 1
+                                    {initial_chapter.get('module', 'Módulo 1')}
                                 </span>
                                 <span id="reader-page-indicator" class="text-xs text-slate-400 font-mono">
-                                    Capítulo 1 de 1
+                                    Capítulo 1 de {len(master_chapters)}
                                 </span>
                             </div>
 
@@ -263,9 +290,9 @@ index_html_content = f"""<!DOCTYPE html>
                             </div>
                         </div>
 
-                        <!-- Rendered Chapter Content -->
+                        <!-- Rendered Chapter Content (Pre-rendered Chapter 0 for instant load) -->
                         <div id="reader-content-box" class="page-flip-anim space-y-4 max-h-[500px] overflow-y-auto pr-3 custom-scrollbar text-base">
-                            <!-- Populated dynamically -->
+                            {initial_content_html}
                         </div>
                     </div>
 
@@ -368,7 +395,7 @@ index_html_content = f"""<!DOCTYPE html>
 
                 <div class="relative">
                     <div id="hook-output" class="bg-slate-900/90 border border-slate-800 p-5 rounded-xl font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[100px] flex items-center">
-Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
+🚨 'Pare de tentar vender produtos físicos se você não quer se estressar com frete. Este e-book de R$ 35,00 me gerou R$ 4.200 em 7 dias.' (Leia a legenda)
                     </div>
                     <button onclick="copyHookToClipboard()" id="btn-copy-hook" class="absolute right-3 bottom-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all border border-slate-700">
                         <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Script
@@ -399,8 +426,7 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             }}
         }}
 
-        // Initialize Application
-        document.addEventListener('DOMContentLoaded', () => {{
+        function initApp() {{
             safeCreateIcons();
             renderTOC();
             loadChapterByIdx(0);
@@ -415,11 +441,19 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
 
             // Keyboard navigation
             document.addEventListener('keydown', (e) => {{
-                if (e.target.tagName === 'INPUT') return;
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
                 if (e.key === 'ArrowRight') nextChapter();
                 if (e.key === 'ArrowLeft') prevChapter();
             }});
-        }});
+        }}
+
+        // Guaranteed Initialization on all load states
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {{
+            setTimeout(initApp, 1);
+        }} else {{
+            document.addEventListener('DOMContentLoaded', initApp);
+            window.addEventListener('load', initApp);
+        }}
 
         // Book Switcher Logic
         function selectBook(bookKey) {{
@@ -677,6 +711,7 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
                 activeBtn.classList.add('bg-slate-800', 'text-slate-100');
                 activeBtn.classList.remove('text-slate-400');
             }}
+            safeCreateIcons();
         }}
 
         function toggleSidebar() {{
@@ -742,4 +777,4 @@ index_out_path = os.path.join(dir_path, "index.html")
 with open(index_out_path, "w", encoding="utf-8") as f:
     f.write(index_html_content)
 
-print("SUCCESS: Regenerated build_interactive_index.py and index.html!")
+print("SUCCESS: Updated build_interactive_index.py with SSR pre-rendered content and failproof initApp!")
