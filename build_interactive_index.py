@@ -9,7 +9,7 @@ with open(json_path, "r", encoding="utf-8") as f:
 
 json_str = json.dumps(all_books, ensure_ascii=False)
 
-# Pre-render initial TOC and Chapter 0 for instant SSR/no-JS display
+# Pre-render initial TOC and Chapter 0 for instant SSR display
 master_chapters = all_books.get("master_guide", [])
 initial_toc_items = []
 for idx, ch in enumerate(master_chapters):
@@ -17,7 +17,7 @@ for idx, ch in enumerate(master_chapters):
     active_cls = "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shadow-sm" if is_active else "text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent"
     initial_toc_items.append(f"""
         <button onclick="window.loadChapterByIdx({idx})" 
-                class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 {active_cls}">
+                class="w-full text-left p-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2.5 {active_cls}">
             <div class="truncate">
                 <span class="text-[10px] text-slate-500 block font-mono font-normal truncate">{ch.get('module', '')}</span>
                 <span class="truncate font-bold">{ch.get('title', '')}</span>
@@ -30,8 +30,11 @@ initial_toc_html = "".join(initial_toc_items)
 initial_chapter = master_chapters[0] if master_chapters else {"title": "Carregando...", "html": "<p>Carregando conteúdo...</p>", "module": "Módulo 1"}
 
 initial_content_html = f"""
-    <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-white pb-3 border-b border-slate-800">{initial_chapter.get('title', '')}</h2>
-    <div class="prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4">
+    <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-white pb-3.5 border-b border-slate-800 flex items-center gap-2">
+        <span class="w-2.5 h-7 rounded-full bg-gradient-to-b from-cyan-400 to-blue-600 inline-block"></span>
+        {initial_chapter.get('title', '')}
+    </h2>
+    <div class="prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 pt-2">
         {initial_chapter.get('html', '')}
     </div>
 """
@@ -41,13 +44,15 @@ index_html_content = f"""<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Definitivo do Criador Digital - Leitor Interativo &amp; E-Books Completo</title>
+    <title>Guia do Criador Digital - Skill Hub &amp; E-Books Interativos</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts & Lucide Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
@@ -74,7 +79,7 @@ index_html_content = f"""<!DOCTYPE html>
         }};
     </script>
 
-    <!-- Load Book Data and Core Functions Early in <head> so all onclick handlers work immediately -->
+    <!-- Global State & Fast Head Handlers -->
     <script>
         window.ALL_BOOKS = {json_str};
         window.currentBookKey = 'master_guide';
@@ -106,11 +111,11 @@ index_html_content = f"""<!DOCTYPE html>
                 }}
                 if (btn) {{
                     if (t === tabId) {{
-                        btn.classList.add('bg-slate-800', 'text-slate-100');
-                        btn.classList.remove('text-slate-400');
+                        btn.classList.add('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/40');
+                        btn.classList.remove('text-slate-400', 'border-transparent');
                     }} else {{
-                        btn.classList.remove('bg-slate-800', 'text-slate-100');
-                        btn.classList.add('text-slate-400');
+                        btn.classList.remove('bg-cyan-500/20', 'text-cyan-300', 'border-cyan-500/40');
+                        btn.classList.add('text-slate-400', 'border-transparent');
                     }}
                 }}
             }});
@@ -127,15 +132,15 @@ index_html_content = f"""<!DOCTYPE html>
             if (mode === 'sepia') {{
                 body.classList.add('theme-sepia');
                 if (btnSepia) {{
-                    btnSepia.className = "px-3 py-1.5 rounded-lg text-amber-900 bg-amber-200 font-bold transition-all";
+                    btnSepia.className = "px-3 py-1.5 rounded-lg text-amber-950 bg-amber-200 font-extrabold shadow-sm border border-amber-300/80 transition-all";
                 }}
                 if (btnDark) {{
-                    btnDark.className = "px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all";
+                    btnDark.className = "px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 transition-all";
                 }}
             }} else {{
                 body.classList.remove('theme-sepia');
                 if (btnDark) {{
-                    btnDark.className = "px-3 py-1.5 rounded-lg text-slate-100 bg-slate-800 font-bold transition-all";
+                    btnDark.className = "px-3 py-1.5 rounded-lg text-slate-100 bg-slate-800 font-extrabold shadow-sm border border-slate-700 transition-all";
                 }}
                 if (btnSepia) {{
                     btnSepia.className = "px-3 py-1.5 rounded-lg text-slate-400 hover:text-amber-300 transition-all";
@@ -145,8 +150,8 @@ index_html_content = f"""<!DOCTYPE html>
         }};
 
         window.adjustFontSize = function(delta) {{
-            if (delta > 0 && window.fontScale < 1.5) window.fontScale += 0.1;
-            if (delta < 0 && window.fontScale > 0.7) window.fontScale -= 0.1;
+            if (delta > 0 && window.fontScale < 1.4) window.fontScale += 0.08;
+            if (delta < 0 && window.fontScale > 0.8) window.fontScale -= 0.08;
             const label = document.getElementById('font-size-label');
             if (label) label.textContent = Math.round(window.fontScale * 100) + '%';
             window.loadChapterByIdx(window.currentChapterIdx);
@@ -168,10 +173,10 @@ index_html_content = f"""<!DOCTYPE html>
 
             if (bookKey === 'master_guide') {{
                 if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-md";
-                if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800";
+                if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800";
             }} else {{
                 if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 shadow-md";
-                if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800";
+                if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800";
             }}
 
             window.renderTOC();
@@ -201,10 +206,10 @@ index_html_content = f"""<!DOCTYPE html>
                 downloadLabel = 'Baixar PDF Aquecimento (175 KB)';
 
                 if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-amber-500 text-slate-950 shadow-md";
-                if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800";
+                if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800";
             }} else {{
                 if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-md";
-                if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800";
+                if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800";
             }}
 
             if (objContainer) objContainer.data = pdfUrl + '#toolbar=1&navpanes=1&scrollbar=1';
@@ -250,7 +255,7 @@ index_html_content = f"""<!DOCTYPE html>
             if (!container) return;
 
             if (filteredList.length === 0) {{
-                container.innerHTML = '<div class="p-4 text-center text-xs text-slate-500">Nenhum capítulo encontrado para "' + window.searchQuery + '"</div>';
+                container.innerHTML = '<div class="p-5 text-center text-xs text-slate-500 font-semibold">Nenhum capítulo encontrado para "' + window.searchQuery + '"</div>';
                 return;
             }}
 
@@ -260,9 +265,9 @@ index_html_content = f"""<!DOCTYPE html>
 
                 const activeCls = isActive 
                     ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shadow-sm' 
-                    : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-transparent';
+                    : 'text-slate-400 hover:bg-slate-900/60 hover:text-slate-200 border border-transparent';
 
-                return '<button onclick="window.loadChapterByIdx(' + originalIdx + ')" class="w-full text-left p-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2 ' + activeCls + '">' +
+                return '<button onclick="window.loadChapterByIdx(' + originalIdx + ')" class="w-full text-left p-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-between gap-2.5 ' + activeCls + '">' +
                     '<div class="truncate">' +
                         '<span class="text-[10px] text-slate-500 block font-mono font-normal truncate">' + ch.module + '</span>' +
                         '<span class="truncate font-bold">' + window.highlightMatch(ch.title, window.searchQuery) + '</span>' +
@@ -295,11 +300,17 @@ index_html_content = f"""<!DOCTYPE html>
                 box.style.fontSize = (window.fontScale * 1.0) + 'rem';
                 
                 const h2 = document.createElement('h2');
-                h2.className = "font-heading font-extrabold text-xl sm:text-2xl text-white pb-3 border-b border-slate-800";
-                h2.textContent = ch.title;
+                h2.className = "font-heading font-extrabold text-xl sm:text-2xl text-white pb-3.5 border-b border-slate-800 flex items-center gap-2";
+                
+                const bar = document.createElement('span');
+                bar.className = "w-2.5 h-7 rounded-full bg-gradient-to-b from-cyan-400 to-blue-600 inline-block";
+                h2.appendChild(bar);
+
+                const titleText = document.createTextNode(' ' + ch.title);
+                h2.appendChild(titleText);
 
                 const contentDiv = document.createElement('div');
-                contentDiv.className = "prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4";
+                contentDiv.className = "prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 pt-2";
                 contentDiv.innerHTML = ch.html;
 
                 box.innerHTML = '';
@@ -438,65 +449,156 @@ index_html_content = f"""<!DOCTYPE html>
     </script>
 
     <style>
-        body {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
+        body {{ 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #030712;
+            color: #f1f5f9;
+        }}
         .font-heading {{ font-family: 'Outfit', sans-serif; }}
 
+        /* Glassmorphism & Avant-Garde Visual System */
         .glass-panel {{
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
         }}
         
         .custom-scrollbar::-webkit-scrollbar {{
             width: 6px;
         }}
         .custom-scrollbar::-webkit-scrollbar-track {{
-            background: #090d16;
+            background: rgba(15, 23, 42, 0.6);
         }}
         .custom-scrollbar::-webkit-scrollbar-thumb {{
-            background: #1e293b;
+            background: #334155;
             border-radius: 6px;
         }}
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {{
+            background: #475569;
+        }}
 
-        /* Sepia Theme Mode Overrides */
-        .theme-sepia {{
-            background-color: #f5eccb !important;
-            color: #2c221e !important;
+        /* Strict & Beautiful Sepia Theme Overrides */
+        body.theme-sepia {{
+            background-color: #f6f0e2 !important;
+            color: #382d26 !important;
         }}
-        .theme-sepia .glass-panel {{
-            background: rgba(247, 240, 219, 0.95) !important;
-            border-color: rgba(180, 140, 90, 0.3) !important;
-            color: #2c221e !important;
+        body.theme-sepia .glass-panel {{
+            background: rgba(246, 238, 224, 0.92) !important;
+            border-color: rgba(190, 165, 130, 0.4) !important;
+            color: #382d26 !important;
+            box-shadow: 0 10px 30px -5px rgba(120, 90, 40, 0.08) !important;
         }}
-        .theme-sepia p, .theme-sepia li, .theme-sepia span {{
-            color: #3d302a !important;
+        body.theme-sepia p, 
+        body.theme-sepia li, 
+        body.theme-sepia span, 
+        body.theme-sepia div,
+        body.theme-sepia label {{
+            color: #3e3229 !important;
         }}
-        .theme-sepia h1, .theme-sepia h2, .theme-sepia h3, .theme-sepia h4, .theme-sepia strong {{
+        body.theme-sepia h1, 
+        body.theme-sepia h2, 
+        body.theme-sepia h3, 
+        body.theme-sepia h4, 
+        body.theme-sepia strong,
+        body.theme-sepia b {{
+            color: #221812 !important;
+        }}
+        body.theme-sepia .text-slate-100,
+        body.theme-sepia .text-slate-200,
+        body.theme-sepia .text-slate-300,
+        body.theme-sepia .text-slate-400,
+        body.theme-sepia .text-slate-500,
+        body.theme-sepia .text-white {{
+            color: #4a3c33 !important;
+        }}
+        body.theme-sepia input,
+        body.theme-sepia select,
+        body.theme-sepia textarea {{
+            background-color: #eae1cd !important;
+            border-color: #cbb998 !important;
+            color: #221812 !important;
+        }}
+        body.theme-sepia input::placeholder {{
+            color: #8c7663 !important;
+        }}
+        body.theme-sepia .bg-slate-900,
+        body.theme-sepia .bg-slate-950,
+        body.theme-sepia .bg-slate-800,
+        body.theme-sepia .bg-slate-800\/90,
+        body.theme-sepia .bg-slate-900\/90,
+        body.theme-sepia .bg-slate-900\/80,
+        body.theme-sepia .bg-slate-900\/60,
+        body.theme-sepia .bg-slate-900\/40,
+        body.theme-sepia .bg-cyan-950\/20,
+        body.theme-sepia .bg-indigo-950\/20 {{
+            background-color: #eae1cd !important;
+            border-color: #d6c6a7 !important;
+        }}
+        body.theme-sepia .border-slate-800,
+        body.theme-sepia .border-slate-700,
+        body.theme-sepia .border-slate-700\/80,
+        body.theme-sepia .border-slate-800\/80 {{
+            border-color: #d8c9ab !important;
+        }}
+        body.theme-sepia blockquote {{
+            background-color: #ece3cf !important;
+            border-left-color: #d97706 !important;
+            color: #382d26 !important;
+        }}
+        body.theme-sepia ul, body.theme-sepia ol {{
+            background-color: #ece3cf !important;
+            border-color: #d6c6a7 !important;
+        }}
+        body.theme-sepia kbd {{
+            background-color: #e2d7c0 !important;
+            border-color: #c7b897 !important;
+            color: #221812 !important;
+        }}
+        body.theme-sepia .tab-btn {{
+            color: #635043 !important;
+        }}
+        body.theme-sepia .tab-btn.bg-cyan-500\/20 {{
+            background-color: #d9ccb4 !important;
             color: #1c130e !important;
+            border-color: #b8a688 !important;
+            box-shadow: 0 2px 8px rgba(90, 65, 30, 0.12) !important;
         }}
-        .theme-sepia .text-white, .theme-sepia .text-slate-100, .theme-sepia .text-slate-200, .theme-sepia .text-slate-300, .theme-sepia .text-slate-400 {{
-            color: #2c221e !important;
+        body.theme-sepia .bg-cyan-500\/15 {{
+            background-color: rgba(217, 119, 6, 0.18) !important;
+            border-color: rgba(217, 119, 6, 0.4) !important;
+            color: #78350f !important;
         }}
-        .theme-sepia .bg-slate-900, .theme-sepia .bg-slate-950 {{
-            background-color: #ede3c0 !important;
-            border-color: #d8cba0 !important;
+        body.theme-sepia .text-cyan-400,
+        body.theme-sepia .text-cyan-300,
+        body.theme-sepia .text-indigo-400,
+        body.theme-sepia .text-rose-400 {{
+            color: #b45309 !important;
         }}
-        .theme-sepia .border-slate-800, .theme-sepia .border-slate-700 {{
-            border-color: #d4c59a !important;
+        body.theme-sepia mark.search-highlight {{
+            background-color: #fef08a !important;
+            color: #451a03 !important;
+        }}
+        body.theme-sepia .custom-scrollbar::-webkit-scrollbar-track {{
+            background: #ede3cb !important;
+        }}
+        body.theme-sepia .custom-scrollbar::-webkit-scrollbar-thumb {{
+            background: #caa67e !important;
         }}
 
         /* Highlight Search Terms */
         mark.search-highlight {{
             background-color: #f59e0b;
             color: #000;
-            padding: 2px 4px;
+            padding: 2px 5px;
             border-radius: 4px;
-            font-weight: 700;
+            font-weight: 800;
         }}
 
         /* Smooth Page Transition */
         .page-flip-anim {{
-            animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
         }}
 
         @keyframes fadeIn {{
@@ -505,91 +607,98 @@ index_html_content = f"""<!DOCTYPE html>
         }}
     </style>
 </head>
-<body id="app-body" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-white custom-scrollbar">
+<body id="app-body" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-white custom-scrollbar relative overflow-x-hidden">
 
-    <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800 px-4 md:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+    <!-- Ambient Mesh Glow Background -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div class="fixed bottom-0 right-1/4 w-[30rem] h-[30rem] bg-indigo-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- Top Avant-Garde Navigation Header -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80 px-4 md:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20 text-lg">
-                📖
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-400 via-blue-600 to-indigo-600 flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/25 text-xl tracking-tighter">
+                ⚡
             </div>
             <div>
                 <h1 class="font-heading font-extrabold text-slate-100 text-base leading-tight flex items-center gap-2">
-                    Guia do Criador Digital <span class="bg-cyan-500/10 text-cyan-400 text-xs px-2.5 py-0.5 rounded-full border border-cyan-500/20 font-semibold">Leitor Interativo &amp; PDF</span>
+                    Guia do Criador Digital 
+                    <span class="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 text-[11px] px-2.5 py-0.5 rounded-full border border-cyan-500/30 font-bold uppercase tracking-wider">
+                        Skill Hub &amp; Reader
+                    </span>
                 </h1>
-                <p class="text-xs text-slate-400">Ecossistema Completo de E-Books • Busca &amp; Leitura em HD</p>
+                <p class="text-xs text-slate-400">Ecossistema Interativo de Aprendizado &amp; Aceleração de Conteúdo</p>
             </div>
         </div>
 
-        <!-- Center Tabs (Visible on all screens) -->
-        <nav class="flex flex-wrap items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
-            <button onclick="window.switchTab('reader')" id="tab-reader" class="tab-btn px-3 sm:px-4 py-2 rounded-lg text-slate-100 bg-slate-800 shadow-sm flex items-center gap-2 transition-all">
+        <!-- Center Tabs -->
+        <nav class="flex flex-wrap items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 text-xs font-semibold shadow-inner">
+            <button onclick="window.switchTab('reader')" id="tab-reader" class="tab-btn px-4 py-2 rounded-xl text-cyan-300 bg-cyan-500/20 border border-cyan-500/40 shadow-sm flex items-center gap-2 transition-all">
                 <i data-lucide="book-open" class="w-4 h-4 text-cyan-400"></i> Leitor de E-Book
             </button>
-            <button onclick="window.switchTab('pdf')" id="tab-pdf" class="tab-btn px-3 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
+            <button onclick="window.switchTab('pdf')" id="tab-pdf" class="tab-btn px-4 py-2 rounded-xl text-slate-400 border border-transparent hover:text-slate-200 flex items-center gap-2 transition-all">
                 <i data-lucide="file-text" class="w-4 h-4 text-indigo-400"></i> Visualizador PDF
             </button>
-            <button onclick="window.switchTab('generator')" id="tab-generator" class="tab-btn px-3 sm:px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
-                <i data-lucide="sparkles" class="w-4 h-4 text-rose-400"></i> Gerador de Ganchos
+            <button onclick="window.switchTab('generator')" id="tab-generator" class="tab-btn px-4 py-2 rounded-xl text-slate-400 border border-transparent hover:text-slate-200 flex items-center gap-2 transition-all">
+                <i data-lucide="sparkles" class="w-4 h-4 text-rose-400"></i> Skill Engine &amp; Ganchos
             </button>
         </nav>
 
-        <!-- Right Quick Actions -->
+        <!-- Right Action Buttons -->
         <div class="flex items-center gap-2">
-            <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" download class="flex items-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md">
-                <i data-lucide="download" class="w-4 h-4"></i> <span class="hidden sm:inline">Baixar PDF Master</span>
+            <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" download class="flex items-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-xl transition-all shadow-lg shadow-cyan-500/20">
+                <i data-lucide="download" class="w-4 h-4"></i> <span class="hidden sm:inline">PDF Master</span>
             </a>
-            <a href="./ESTRUTURA_AQUECIMENTO_ORGANICO.pdf" download class="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-extrabold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md" title="Baixar E-Book Bônus: Estrutura Aquecimento Orgânico">
-                <i data-lucide="flame" class="w-4 h-4"></i> <span class="hidden sm:inline">PDF Aquecimento</span>
+            <a href="./ESTRUTURA_AQUECIMENTO_ORGANICO.pdf" download class="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-xl transition-all shadow-lg shadow-amber-500/20" title="Baixar PDF Bônus Aquecimento">
+                <i data-lucide="flame" class="w-4 h-4"></i> <span class="hidden sm:inline">PDF Bônus</span>
             </a>
         </div>
     </header>
 
-    <!-- Main Content Area -->
+    <!-- Main Workspace Area -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
 
         <!-- TAB 1: E-BOOK INTERACTIVE READER -->
         <section id="sec-reader" class="tab-content space-y-5">
 
-            <!-- E-Book Book Switcher Banner -->
+            <!-- Book Selection Banner -->
             <div class="glass-panel p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 border border-cyan-500/20 bg-cyan-950/20">
                 <div class="flex items-center gap-2 text-xs font-bold text-slate-200">
                     <i data-lucide="library" class="w-4 h-4 text-cyan-400"></i>
-                    <span>Selecione o E-Book para Leitura Interativa:</span>
+                    <span>Selecione o Livro para Leitura Interativa:</span>
                 </div>
                 <div class="flex items-center gap-2 w-full sm:w-auto">
                     <button onclick="window.selectBook('master_guide')" id="btn-book-master" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-md">
-                        <i data-lucide="book" class="w-3.5 h-3.5"></i> 1. Manual Master Completo
+                        <i data-lucide="book" class="w-3.5 h-3.5"></i> 1. Manual Master (38 Seções)
                     </button>
-                    <button onclick="window.selectBook('aquecimento')" id="btn-book-aquecimento" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
+                    <button onclick="window.selectBook('aquecimento')" id="btn-book-aquecimento" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800">
                         <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400"></i> 2. E-Book Bônus Aquecimento
                     </button>
                 </div>
             </div>
 
-            <!-- Search Bar & Controls Banner -->
+            <!-- Controls Banner -->
             <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
                 
                 <!-- Live Search Box -->
                 <div class="relative w-full md:w-1/2">
                     <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
                     <input type="text" id="chapter-search-input" onkeyup="window.handleSearch(this.value)" placeholder="🔍 Pesquisar em todos os tópicos deste livro..." 
-                           class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-11 pr-10 py-3 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all">
+                           class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-11 pr-10 py-3 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all">
                     <button onclick="window.clearSearch()" id="clear-search-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
                         <i data-lucide="x" class="w-4 h-4"></i>
                     </button>
                 </div>
 
-                <!-- Reading Mode Toggles & Font Controls -->
+                <!-- Theme & Font Controls -->
                 <div class="flex items-center justify-between w-full md:w-auto gap-3">
-                    <div class="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
-                        <button onclick="window.setTheme('dark')" id="btn-theme-dark" class="px-3 py-1.5 rounded-lg text-slate-100 bg-slate-800 font-bold transition-all" title="Modo Escuro">🌙 Escuro</button>
-                        <button onclick="window.setTheme('sepia')" id="btn-theme-sepia" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-amber-300 transition-all" title="Modo Sépia Leitura">📜 Sépia</button>
+                    <div class="flex items-center bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 text-xs">
+                        <button onclick="window.setTheme('dark')" id="btn-theme-dark" class="px-3 py-1.5 rounded-lg text-slate-100 bg-slate-800 font-extrabold border border-slate-700 shadow-sm transition-all" title="Modo Escuro">🌙 Escuro</button>
+                        <button onclick="window.setTheme('sepia')" id="btn-theme-sepia" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-amber-300 font-extrabold transition-all" title="Modo Sépia Leitura">📜 Sépia</button>
                     </div>
 
-                    <div class="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+                    <div class="flex items-center bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 text-xs">
                         <button onclick="window.adjustFontSize(-1)" class="px-2.5 py-1.5 font-extrabold text-slate-300 hover:text-white" title="Diminuir Fonte">A-</button>
-                        <span id="font-size-label" class="px-2 text-slate-400 text-xs">100%</span>
+                        <span id="font-size-label" class="px-2 text-slate-400 text-xs font-mono">100%</span>
                         <button onclick="window.adjustFontSize(1)" class="px-2.5 py-1.5 font-extrabold text-slate-300 hover:text-white" title="Aumentar Fonte">A+</button>
                     </div>
 
@@ -599,19 +708,19 @@ index_html_content = f"""<!DOCTYPE html>
                 </div>
             </div>
 
-            <!-- Reader Main Workspace (Sidebar + Flipbook Reader) -->
+            <!-- Workspace Grid (Sidebar + Main Content) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
                 <!-- Table of Contents Sidebar -->
                 <aside id="toc-sidebar" class="lg:col-span-4 glass-panel rounded-2xl p-4 flex flex-col max-h-[750px]">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
                         <h3 class="font-heading font-extrabold text-sm text-slate-100 flex items-center gap-2">
-                            <i data-lucide="book" class="w-4 h-4 text-cyan-400"></i> Sumário do Livro
+                            <i data-lucide="book-open-check" class="w-4 h-4 text-cyan-400"></i> Sumário do Livro
                         </h3>
                         <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">{len(master_chapters)} Seções</span>
                     </div>
 
-                    <!-- Reading Progress Bar -->
+                    <!-- Progress Bar -->
                     <div class="mb-3 space-y-1">
                         <div class="flex justify-between text-[11px] text-slate-400">
                             <span>Progresso da Leitura</span>
@@ -622,17 +731,17 @@ index_html_content = f"""<!DOCTYPE html>
                         </div>
                     </div>
 
-                    <!-- Filterable List of Chapters (Pre-rendered for instant visibility) -->
+                    <!-- Chapter Items -->
                     <div id="toc-list" class="flex-1 overflow-y-auto space-y-1.5 custom-scrollbar pr-1">
                         {initial_toc_html}
                     </div>
                 </aside>
 
-                <!-- Chapter Reader Body -->
+                <!-- Reader Display Box -->
                 <article class="lg:col-span-8 glass-panel rounded-2xl p-6 sm:p-8 flex flex-col justify-between min-h-[650px]">
                     
-                    <!-- Chapter Top Controls -->
                     <div>
+                        <!-- Header Bar -->
                         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80 mb-6">
                             <div class="flex items-center gap-2">
                                 <span id="reader-module-badge" class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full font-bold">
@@ -643,9 +752,9 @@ index_html_content = f"""<!DOCTYPE html>
                                 </span>
                             </div>
 
-                            <!-- Flip Controls Header -->
+                            <!-- Page Flip Header Controls -->
                             <div class="flex items-center gap-2">
-                                <button onclick="window.prevChapter()" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg text-xs font-bold flex items-center gap-1 border border-slate-800 transition-all">
+                                <button onclick="window.prevChapter()" class="px-3 py-1.5 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg text-xs font-bold flex items-center gap-1 border border-slate-800 transition-all">
                                     <i data-lucide="chevron-left" class="w-4 h-4"></i> Anterior
                                 </button>
                                 <button onclick="window.nextChapter()" class="px-3 py-1.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold rounded-lg text-xs flex items-center gap-1 shadow-md shadow-cyan-500/20 transition-all">
@@ -654,15 +763,15 @@ index_html_content = f"""<!DOCTYPE html>
                             </div>
                         </div>
 
-                        <!-- Rendered Chapter Content (Pre-rendered Chapter 0 for instant load) -->
+                        <!-- Rendered Chapter Content -->
                         <div id="reader-content-box" class="page-flip-anim space-y-4 max-h-[500px] overflow-y-auto pr-3 custom-scrollbar text-base">
                             {initial_content_html}
                         </div>
                     </div>
 
-                    <!-- Chapter Bottom Page Switcher Footer -->
+                    <!-- Footer Page Switcher -->
                     <div class="pt-6 border-t border-slate-800/80 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <button onclick="window.prevChapter()" class="w-full sm:w-auto px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold rounded-xl text-xs flex items-center justify-center gap-2 border border-slate-800 transition-all">
+                        <button onclick="window.prevChapter()" class="w-full sm:w-auto px-5 py-2.5 bg-slate-900/80 hover:bg-slate-800 text-slate-200 font-bold rounded-xl text-xs flex items-center justify-center gap-2 border border-slate-800 transition-all">
                             <i data-lucide="arrow-left" class="w-4 h-4"></i> Capítulo Anterior
                         </button>
 
@@ -679,21 +788,19 @@ index_html_content = f"""<!DOCTYPE html>
             </div>
         </section>
 
-        <!-- TAB 2: FULL PDF EMBED VIEWER -->
+        <!-- TAB 2: PDF VIEWER -->
         <section id="sec-pdf" class="tab-content hidden space-y-5">
-
-            <!-- PDF Book Switcher Banner -->
             <div class="glass-panel p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 border border-indigo-500/20 bg-indigo-950/20">
                 <div class="flex items-center gap-2 text-xs font-bold text-slate-200">
                     <i data-lucide="file-check" class="w-4 h-4 text-indigo-400"></i>
-                    <span>Selecione o Documento PDF para Visualização Completa:</span>
+                    <span>Selecione o PDF para Visualização em HD:</span>
                 </div>
                 <div class="flex items-center gap-2 w-full sm:w-auto">
                     <button onclick="window.selectPdf('master')" id="btn-pdf-master" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-md">
-                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> 1. Manual Master (81 Págs)
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> 1. Manual Master (81 Páginas)
                     </button>
-                    <button onclick="window.selectPdf('aquecimento')" id="btn-pdf-aquecimento" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
-                        <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400"></i> 2. E-Book Bônus Aquecimento
+                    <button onclick="window.selectPdf('aquecimento')" id="btn-pdf-aquecimento" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800">
+                        <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400"></i> 2. PDF Bônus Aquecimento
                     </button>
                 </div>
             </div>
@@ -734,34 +841,72 @@ index_html_content = f"""<!DOCTYPE html>
             </div>
         </section>
 
-        <!-- TAB 3: REELS HOOK GENERATOR -->
+        <!-- TAB 3: SKILL ENGINE & HOOK ACCELERATOR -->
         <section id="sec-generator" class="tab-content hidden space-y-6">
-            <div class="glass-panel p-6 sm:p-8 rounded-2xl max-w-3xl mx-auto space-y-6">
-                <div>
-                    <h3 class="font-heading text-xl font-bold text-white flex items-center gap-2">
-                        <i data-lucide="sparkles" class="w-5 h-5 text-rose-400"></i> Gerador de Ganchos Virais para o Instagram
-                    </h3>
-                    <p class="text-xs text-slate-400">Crie scripts de 7 segundos focados em promover seu e-book de R$ 35 com alta retenção.</p>
+            
+            <!-- Skill Engine Header -->
+            <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-rose-500/20 bg-rose-950/10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                                Skill Accelerator Module
+                            </span>
+                        </div>
+                        <h3 class="font-heading text-2xl font-extrabold text-white flex items-center gap-2">
+                            <i data-lucide="zap" class="w-6 h-6 text-rose-400"></i> Gerador de Ganchos Virais &amp; Copywriting
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-1 max-w-2xl">
+                            Crie scripts de retenção rápida de 7 segundos para Instagram Reels, TikTok e Stories desenhados especificamente para vender o seu produto digital de R$ 35,00.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Matrix Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="glass-panel p-4 rounded-xl border border-slate-800 space-y-1.5">
+                    <div class="flex items-center gap-2 text-cyan-400 text-xs font-bold">
+                        <i data-lucide="target" class="w-4 h-4"></i> Habilidade 1: Retenção nos 3s
+                    </div>
+                    <p class="text-[11px] text-slate-400">Captura a atenção imediata antes que o usuário role o feed.</p>
                 </div>
 
+                <div class="glass-panel p-4 rounded-xl border border-slate-800 space-y-1.5">
+                    <div class="flex items-center gap-2 text-amber-400 text-xs font-bold">
+                        <i data-lucide="flame" class="w-4 h-4"></i> Habilidade 2: Curiosidade &amp; Quebra
+                    </div>
+                    <p class="text-[11px] text-slate-400">Gera desejo reprimido e obriga o espectador a ler a legenda.</p>
+                </div>
+
+                <div class="glass-panel p-4 rounded-xl border border-slate-800 space-y-1.5">
+                    <div class="flex items-center gap-2 text-emerald-400 text-xs font-bold">
+                        <i data-lucide="dollar-sign" class="w-4 h-4"></i> Habilidade 3: CTA Direta R$ 35
+                    </div>
+                    <p class="text-[11px] text-slate-400">Converte comentários em mensagens automáticas no ManyChat.</p>
+                </div>
+            </div>
+
+            <!-- Hook Generator Workspace -->
+            <div class="glass-panel p-6 sm:p-8 rounded-2xl max-w-3xl mx-auto space-y-6">
                 <div class="flex flex-col sm:flex-row gap-3">
-                    <select id="niche-select" class="bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-xl p-3 flex-1 font-semibold focus:outline-none focus:border-cyan-500">
-                        <option value="curiosidade">Curiosidade (Alta Retenção)</option>
-                        <option value="controversia">Controvérsia &amp; Quebra de Padrão</option>
-                        <option value="fomo">FOMO (Medo de Ficar de Fora)</option>
-                        <option value="venda">CTA de Venda Direta R$35</option>
+                    <select id="niche-select" class="bg-slate-900/90 border border-slate-800 text-slate-200 text-xs rounded-xl p-3.5 flex-1 font-semibold focus:outline-none focus:border-rose-500">
+                        <option value="curiosidade">🔥 Curiosidade (Alta Retenção de Vídeo)</option>
+                        <option value="controversia">⚡ Controvérsia &amp; Quebra de Padrão</option>
+                        <option value="fomo">⏳ FOMO (Escassez &amp; Oportunidade)</option>
+                        <option value="venda">💰 CTA de Venda Direta R$ 35,00</option>
                     </select>
 
-                    <button onclick="window.generateHook()" class="bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2">
-                        <i data-lucide="zap" class="w-4 h-4"></i> Gerar Gancho
+                    <button onclick="window.generateHook()" class="bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-extrabold text-xs px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-rose-500/20 flex items-center justify-center gap-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i> Gerar Novo Gancho
                     </button>
                 </div>
 
                 <div class="relative">
-                    <div id="hook-output" class="bg-slate-900/90 border border-slate-800 p-5 rounded-xl font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[100px] flex items-center">
+                    <div id="hook-output" class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl font-mono text-xs sm:text-sm text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[120px] flex items-center shadow-inner">
 🚨 'Pare de tentar vender produtos físicos se você não quer se estressar com frete. Este e-book de R$ 35,00 me gerou R$ 4.200 em 7 dias.' (Leia a legenda)
                     </div>
-                    <button onclick="window.copyHookToClipboard()" id="btn-copy-hook" class="absolute right-3 bottom-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all border border-slate-700">
+                    <button onclick="window.copyHookToClipboard()" id="btn-copy-hook" class="absolute right-3.5 bottom-3.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all border border-slate-700 shadow-md">
                         <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Script
                     </button>
                 </div>
@@ -777,4 +922,4 @@ index_out_path = os.path.join(dir_path, "index.html")
 with open(index_out_path, "w", encoding="utf-8") as f:
     f.write(index_html_content)
 
-print("SUCCESS: Updated build_interactive_index.py with early <head> JS binding and safe DOM node rendering!")
+print("SUCCESS: Updated build_interactive_index.py with strict Sepia theme contrast overrides and Avant-Garde Skill Engine UI!")
