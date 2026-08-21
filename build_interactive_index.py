@@ -5,17 +5,16 @@ dir_path = "/home/zeronight/Downloads/a5f8ef87-6cf1-4184-947b-a330eb96429a_Expor
 json_path = os.path.join(dir_path, "ebook_chapters.json")
 
 with open(json_path, "r", encoding="utf-8") as f:
-    chapters = json.load(f)
+    all_books = json.load(f)
 
-# Compact JSON string for JS
-json_str = json.dumps(chapters, ensure_ascii=False)
+json_str = json.dumps(all_books, ensure_ascii=False)
 
 index_html_content = f"""<!DOCTYPE html>
 <html lang="pt-BR" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Definitivo do Criador Digital - Leitor Interativo &amp; E-Book Completo</title>
+    <title>Guia Definitivo do Criador Digital - Leitor Interativo &amp; E-Books Completo</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -118,16 +117,16 @@ index_html_content = f"""<!DOCTYPE html>
 <body id="app-body" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-white custom-scrollbar">
 
     <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between">
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-800 px-4 md:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-black text-white shadow-lg shadow-cyan-500/20 text-lg">
                 📖
             </div>
             <div>
                 <h1 class="font-heading font-extrabold text-slate-100 text-base leading-tight flex items-center gap-2">
-                    Guia do Criador Digital <span class="bg-cyan-500/10 text-cyan-400 text-xs px-2.5 py-0.5 rounded-full border border-cyan-500/20 font-semibold">Leitor Interativo</span>
+                    Guia do Criador Digital <span class="bg-cyan-500/10 text-cyan-400 text-xs px-2.5 py-0.5 rounded-full border border-cyan-500/20 font-semibold">Leitor Interativo &amp; PDF</span>
                 </h1>
-                <p class="text-xs text-slate-400">Manual Master Completo • Busca Instantânea &amp; Troca de Páginas</p>
+                <p class="text-xs text-slate-400">Ecossistema Completo de E-Books • Busca &amp; Leitura em HD</p>
             </div>
         </div>
 
@@ -150,10 +149,7 @@ index_html_content = f"""<!DOCTYPE html>
                 <i data-lucide="download" class="w-4 h-4"></i> <span class="hidden sm:inline">Baixar PDF Master</span>
             </a>
             <a href="./ESTRUTURA_AQUECIMENTO_ORGANICO.pdf" download class="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-extrabold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md" title="Baixar E-Book Bônus: Estrutura Aquecimento Orgânico">
-                <i data-lucide="flame" class="w-4 h-4"></i> <span class="hidden sm:inline">E-book Aquecimento</span>
-            </a>
-            <a href="./LANDING_PAGE_OFERTA_35.html" target="_blank" class="hidden sm:flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold px-3 py-2.5 rounded-xl border border-slate-700 transition-all">
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Landing Page
+                <i data-lucide="flame" class="w-4 h-4"></i> <span class="hidden sm:inline">PDF Aquecimento</span>
             </a>
         </div>
     </header>
@@ -161,8 +157,24 @@ index_html_content = f"""<!DOCTYPE html>
     <!-- Main Content Area -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-6">
 
-        <!-- TAB 1: E-BOOK INTERACTIVE READER (DEFAULT ACTIVE VIEW) -->
+        <!-- TAB 1: E-BOOK INTERACTIVE READER -->
         <section id="sec-reader" class="tab-content space-y-5">
+
+            <!-- E-Book Book Switcher Banner -->
+            <div class="glass-panel p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 border border-cyan-500/20 bg-cyan-950/20">
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-200">
+                    <i data-lucide="library" class="w-4 h-4 text-cyan-400"></i>
+                    <span>Selecione o E-Book para Leitura Interativa:</span>
+                </div>
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <button onclick="selectBook('master_guide')" id="btn-book-master" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-md">
+                        <i data-lucide="book" class="w-3.5 h-3.5"></i> 1. Manual Master Completo
+                    </button>
+                    <button onclick="selectBook('aquecimento')" id="btn-book-aquecimento" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
+                        <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400"></i> 2. E-Book Bônus Aquecimento
+                    </button>
+                </div>
+            </div>
 
             <!-- Search Bar & Controls Banner -->
             <div class="glass-panel p-4 sm:p-5 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
@@ -170,7 +182,7 @@ index_html_content = f"""<!DOCTYPE html>
                 <!-- Live Search Box -->
                 <div class="relative w-full md:w-1/2">
                     <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                    <input type="text" id="chapter-search-input" onkeyup="handleSearch(this.value)" placeholder="🔍 Pesquisar em todos os capítulos e tópicos do livro..." 
+                    <input type="text" id="chapter-search-input" onkeyup="handleSearch(this.value)" placeholder="🔍 Pesquisar em todos os tópicos deste livro..." 
                            class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-11 pr-10 py-3 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all">
                     <button onclick="clearSearch()" id="clear-search-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
                         <i data-lucide="x" class="w-4 h-4"></i>
@@ -199,13 +211,13 @@ index_html_content = f"""<!DOCTYPE html>
             <!-- Reader Main Workspace (Sidebar + Flipbook Reader) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-                <!-- Table of Contents Sidebar (3 cols on desktop) -->
+                <!-- Table of Contents Sidebar -->
                 <aside id="toc-sidebar" class="lg:col-span-4 glass-panel rounded-2xl p-4 flex flex-col max-h-[750px]">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
                         <h3 class="font-heading font-extrabold text-sm text-slate-100 flex items-center gap-2">
                             <i data-lucide="book" class="w-4 h-4 text-cyan-400"></i> Sumário do Livro
                         </h3>
-                        <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">81 Seções</span>
+                        <span id="chapter-count-badge" class="text-xs bg-slate-800 text-cyan-400 px-2.5 py-0.5 rounded-full font-mono border border-slate-700">-- Seções</span>
                     </div>
 
                     <!-- Reading Progress Bar -->
@@ -225,10 +237,10 @@ index_html_content = f"""<!DOCTYPE html>
                     </div>
                 </aside>
 
-                <!-- Chapter Reader Body (8 cols on desktop) -->
+                <!-- Chapter Reader Body -->
                 <article class="lg:col-span-8 glass-panel rounded-2xl p-6 sm:p-8 flex flex-col justify-between min-h-[650px]">
                     
-                    <!-- Chapter Top Controls (Module Badge & Page Switcher) -->
+                    <!-- Chapter Top Controls -->
                     <div>
                         <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80 mb-6">
                             <div class="flex items-center gap-2">
@@ -236,7 +248,7 @@ index_html_content = f"""<!DOCTYPE html>
                                     Módulo 1
                                 </span>
                                 <span id="reader-page-indicator" class="text-xs text-slate-400 font-mono">
-                                    Página 1 de 81
+                                    Capítulo 1 de 1
                                 </span>
                             </div>
 
@@ -278,35 +290,52 @@ index_html_content = f"""<!DOCTYPE html>
 
         <!-- TAB 2: FULL PDF EMBED VIEWER -->
         <section id="sec-pdf" class="tab-content hidden space-y-5">
+
+            <!-- PDF Book Switcher Banner -->
+            <div class="glass-panel p-3.5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 border border-indigo-500/20 bg-indigo-950/20">
+                <div class="flex items-center gap-2 text-xs font-bold text-slate-200">
+                    <i data-lucide="file-check" class="w-4 h-4 text-indigo-400"></i>
+                    <span>Selecione o Documento PDF para Visualização Completa:</span>
+                </div>
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <button onclick="selectPdf('master')" id="btn-pdf-master" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-md">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> 1. Manual Master (81 Págs)
+                    </button>
+                    <button onclick="selectPdf('aquecimento')" id="btn-pdf-aquecimento" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
+                        <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400"></i> 2. E-Book Bônus Aquecimento
+                    </button>
+                </div>
+            </div>
+
             <div class="glass-panel p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 class="font-heading text-xl font-bold text-white flex items-center gap-2">
-                        <i data-lucide="file-text" class="w-5 h-5 text-indigo-400"></i> Visualizador do PDF Master (80 Páginas)
+                    <h2 id="pdf-viewer-title" class="font-heading text-xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-5 h-5 text-indigo-400"></i> Visualizador do PDF Master Completo
                     </h2>
-                    <p class="text-xs text-slate-400">Versão completa formatada para leitura, impressão e navegação HD em todos os dispositivos.</p>
+                    <p id="pdf-viewer-desc" class="text-xs text-slate-400">Versão completa formatada para leitura, impressão e navegação HD em todos os dispositivos.</p>
                 </div>
                 <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
-                    <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
+                    <a id="pdf-external-btn" href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
                         <i data-lucide="external-link" class="w-4 h-4"></i> Abrir em Nova Aba
                     </a>
-                    <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" download class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
-                        <i data-lucide="download" class="w-4 h-4"></i> Baixar PDF (2.4 MB)
+                    <a id="pdf-download-btn" href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" download class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
+                        <i data-lucide="download" class="w-4 h-4"></i> Baixar PDF Master (2.5 MB)
                     </a>
                 </div>
             </div>
 
             <div class="glass-panel rounded-2xl overflow-hidden h-[800px] border border-slate-800 relative bg-slate-950 flex flex-col">
-                <object data="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf#toolbar=1&navpanes=1&scrollbar=1" type="application/pdf" class="w-full h-full min-h-[750px]">
-                    <embed src="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf#toolbar=1&navpanes=1" type="application/pdf" class="w-full h-full min-h-[750px]" />
+                <object id="pdf-object-container" data="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf#toolbar=1&navpanes=1&scrollbar=1" type="application/pdf" class="w-full h-full min-h-[750px]">
+                    <embed id="pdf-embed-container" src="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf#toolbar=1&navpanes=1" type="application/pdf" class="w-full h-full min-h-[750px]" />
                     <div class="p-8 text-center text-slate-300 space-y-4 my-auto">
                         <div class="inline-flex p-4 rounded-2xl bg-indigo-500/10 text-indigo-400 mb-2">
                             <i data-lucide="file-text" class="w-10 h-10"></i>
                         </div>
                         <h3 class="text-lg font-bold text-white">Visualização de PDF Integrada</h3>
-                        <p class="text-xs text-slate-400 max-w-md mx-auto">Para visualizar todas as 80 páginas diretamente ou salvar em seu dispositivo, clique no botão abaixo:</p>
+                        <p class="text-xs text-slate-400 max-w-md mx-auto">Para visualizar as páginas diretamente ou salvar em seu dispositivo, clique no botão abaixo:</p>
                         <div class="flex items-center justify-center gap-3 pt-2">
-                            <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" target="_blank" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-xl font-bold text-xs transition-all shadow-lg flex items-center gap-2">
-                                <i data-lucide="book-open" class="w-4 h-4"></i> Abrir PDF Completo (80 Páginas)
+                            <a id="pdf-fallback-btn" href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" target="_blank" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-xl font-bold text-xs transition-all shadow-lg flex items-center gap-2">
+                                <i data-lucide="book-open" class="w-4 h-4"></i> Abrir PDF em Nova Aba
                             </a>
                         </div>
                     </div>
@@ -314,7 +343,7 @@ index_html_content = f"""<!DOCTYPE html>
             </div>
         </section>
 
-        <!-- TAB 4: REELS HOOK GENERATOR -->
+        <!-- TAB 3: REELS HOOK GENERATOR -->
         <section id="sec-generator" class="tab-content hidden space-y-6">
             <div class="glass-panel p-6 sm:p-8 rounded-2xl max-w-3xl mx-auto space-y-6">
                 <div>
@@ -324,21 +353,26 @@ index_html_content = f"""<!DOCTYPE html>
                     <p class="text-xs text-slate-400">Crie scripts de 7 segundos focados em promover seu e-book de R$ 35 com alta retenção.</p>
                 </div>
 
-                <div class="flex gap-3">
+                <div class="flex flex-col sm:flex-row gap-3">
                     <select id="niche-select" class="bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-xl p-3 flex-1 font-semibold focus:outline-none focus:border-cyan-500">
-                        <option>Curiosidade (Alta Retenção)</option>
-                        <option>Controvérsia Negativa</option>
-                        <option>FOMO (Medo de Perder)</option>
-                        <option>CTA de Venda Direta R$35</option>
+                        <option value="curiosidade">Curiosidade (Alta Retenção)</option>
+                        <option value="controversia">Controvérsia &amp; Quebra de Padrão</option>
+                        <option value="fomo">FOMO (Medo de Ficar de Fora)</option>
+                        <option value="venda">CTA de Venda Direta R$35</option>
                     </select>
 
-                    <button onclick="generateHook()" class="bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-lg flex items-center gap-2">
+                    <button onclick="generateHook()" class="bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-400 hover:to-pink-500 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2">
                         <i data-lucide="zap" class="w-4 h-4"></i> Gerar Gancho
                     </button>
                 </div>
 
-                <div id="hook-output" class="bg-slate-900/90 border border-slate-800 p-5 rounded-xl font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed">
+                <div class="relative">
+                    <div id="hook-output" class="bg-slate-900/90 border border-slate-800 p-5 rounded-xl font-mono text-xs text-emerald-400 whitespace-pre-wrap leading-relaxed min-h-[100px] flex items-center">
 Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
+                    </div>
+                    <button onclick="copyHookToClipboard()" id="btn-copy-hook" class="absolute right-3 bottom-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all border border-slate-700">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Script
+                    </button>
                 </div>
             </div>
         </section>
@@ -347,11 +381,16 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
 
     <!-- JavaScript Data & Reader Logic -->
     <script>
-        const EBOOK_CHAPTERS = {json_str};
+        const ALL_BOOKS = {json_str};
 
+        let currentBookKey = 'master_guide';
         let currentChapterIdx = 0;
         let fontScale = 1.0;
         let searchQuery = "";
+
+        function getActiveChapters() {{
+            return ALL_BOOKS[currentBookKey] || [];
+        }}
 
         // Safe Lucide Icon Creation Helper
         function safeCreateIcons() {{
@@ -382,11 +421,83 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             }});
         }});
 
-        function renderTOC(filteredList = EBOOK_CHAPTERS) {{
+        // Book Switcher Logic
+        function selectBook(bookKey) {{
+            if (!ALL_BOOKS[bookKey]) return;
+            currentBookKey = bookKey;
+            currentChapterIdx = 0;
+            searchQuery = "";
+
+            const searchInput = document.getElementById('chapter-search-input');
+            if (searchInput) searchInput.value = "";
+            const clearBtn = document.getElementById('clear-search-btn');
+            if (clearBtn) clearBtn.classList.add('hidden');
+
+            const btnMaster = document.getElementById('btn-book-master');
+            const btnAquecimento = document.getElementById('btn-book-aquecimento');
+
+            if (bookKey === 'master_guide') {{
+                if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 shadow-md";
+                if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800";
+            }} else {{
+                if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-gradient-to-r from-amber-500 to-orange-600 text-slate-950 shadow-md";
+                if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800";
+            }}
+
+            renderTOC();
+            loadChapterByIdx(0);
+        }}
+
+        // PDF Switcher Logic
+        function selectPdf(pdfKey) {{
+            const btnMaster = document.getElementById('btn-pdf-master');
+            const btnAquecimento = document.getElementById('btn-pdf-aquecimento');
+            const objContainer = document.getElementById('pdf-object-container');
+            const embedContainer = document.getElementById('pdf-embed-container');
+            const titleEl = document.getElementById('pdf-viewer-title');
+            const descEl = document.getElementById('pdf-viewer-desc');
+            const externalBtn = document.getElementById('pdf-external-btn');
+            const downloadBtn = document.getElementById('pdf-download-btn');
+            const fallbackBtn = document.getElementById('pdf-fallback-btn');
+
+            let pdfUrl = './GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf';
+            let pdfTitle = 'Visualizador do PDF Master Completo (81 Páginas)';
+            let pdfDesc = 'Versão completa formatada para leitura, impressão e navegação HD em todos os dispositivos.';
+            let downloadLabel = 'Baixar PDF Master (2.5 MB)';
+
+            if (pdfKey === 'aquecimento') {{
+                pdfUrl = './ESTRUTURA_AQUECIMENTO_ORGANICO.pdf';
+                pdfTitle = 'Visualizador do E-Book Bônus: Estrutura Aquecimento Orgânico';
+                pdfDesc = 'Manual prático de 52 perguntas e respostas para aquecer perfis e evitar shadowban.';
+                downloadLabel = 'Baixar PDF Aquecimento (175 KB)';
+
+                if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-amber-500 text-slate-950 shadow-md";
+                if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800";
+            }} else {{
+                if (btnMaster) btnMaster.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-indigo-600 text-white shadow-md";
+                if (btnAquecimento) btnAquecimento.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800";
+            }}
+
+            if (objContainer) objContainer.data = pdfUrl + '#toolbar=1&navpanes=1&scrollbar=1';
+            if (embedContainer) embedContainer.src = pdfUrl + '#toolbar=1&navpanes=1';
+            if (titleEl) titleEl.innerHTML = `<i data-lucide="file-text" class="w-5 h-5 text-indigo-400"></i> ${{pdfTitle}}`;
+            if (descEl) descEl.innerText = pdfDesc;
+            if (externalBtn) externalBtn.href = pdfUrl;
+            if (downloadBtn) {{
+                downloadBtn.href = pdfUrl;
+                downloadBtn.innerHTML = `<i data-lucide="download" class="w-4 h-4"></i> ${{downloadLabel}}`;
+            }}
+            if (fallbackBtn) fallbackBtn.href = pdfUrl;
+
+            safeCreateIcons();
+        }}
+
+        function renderTOC(filteredList = getActiveChapters()) {{
             const container = document.getElementById('toc-list');
             const badge = document.getElementById('chapter-count-badge');
-            if (badge) badge.innerText = `${{filteredList.length}} Seções`;
+            const activeList = getActiveChapters();
 
+            if (badge) badge.innerText = `${{filteredList.length}} Seções`;
             if (!container) return;
 
             if (filteredList.length === 0) {{
@@ -395,7 +506,7 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             }}
 
             container.innerHTML = filteredList.map((ch, idx) => {{
-                const originalIdx = EBOOK_CHAPTERS.findIndex(c => c.id === ch.id);
+                const originalIdx = activeList.findIndex(c => c.id === ch.id);
                 const isActive = originalIdx === currentChapterIdx;
 
                 return `
@@ -418,15 +529,16 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
         }}
 
         function loadChapterByIdx(idx) {{
-            if (idx < 0 || idx >= EBOOK_CHAPTERS.length) return;
+            const activeList = getActiveChapters();
+            if (idx < 0 || idx >= activeList.length) return;
             currentChapterIdx = idx;
-            const ch = EBOOK_CHAPTERS[idx];
+            const ch = activeList[idx];
 
             const moduleBadge = document.getElementById('reader-module-badge');
             if (moduleBadge) moduleBadge.innerText = ch.module;
 
             const pageIndicator = document.getElementById('reader-page-indicator');
-            if (pageIndicator) pageIndicator.innerText = `Capítulo ${{idx + 1}} de ${{EBOOK_CHAPTERS.length}}`;
+            if (pageIndicator) pageIndicator.innerText = `Capítulo ${{idx + 1}} de ${{activeList.length}}`;
 
             const box = document.getElementById('reader-content-box');
             if (box) {{
@@ -442,12 +554,11 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
                     </div>
                 `;
 
-                // Scroll top of content box
                 box.scrollTop = 0;
             }}
 
             // Update Progress Bar
-            const percent = Math.round(((idx + 1) / EBOOK_CHAPTERS.length) * 100);
+            const percent = Math.round(((idx + 1) / activeList.length) * 100);
             const progressPercent = document.getElementById('progress-percent');
             if (progressPercent) progressPercent.innerText = `${{percent}}%`;
             const progressBarFill = document.getElementById('progress-bar-fill');
@@ -459,7 +570,8 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
         }}
 
         function nextChapter() {{
-            if (currentChapterIdx < EBOOK_CHAPTERS.length - 1) {{
+            const activeList = getActiveChapters();
+            if (currentChapterIdx < activeList.length - 1) {{
                 loadChapterByIdx(currentChapterIdx + 1);
             }}
         }}
@@ -486,8 +598,9 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             renderTOC(filtered);
 
             if (filtered.length > 0 && searchQuery.length > 1) {{
-                const firstMatchIdx = EBOOK_CHAPTERS.findIndex(c => c.id === filtered[0].id);
-                loadChapterByIdx(firstMatchIdx);
+                const activeList = getActiveChapters();
+                const firstMatchIdx = activeList.findIndex(c => c.id === filtered[0].id);
+                if (firstMatchIdx !== -1) loadChapterByIdx(firstMatchIdx);
             }}
         }}
 
@@ -498,9 +611,10 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
         }}
 
         function filterChapters(query) {{
-            if (!query) return EBOOK_CHAPTERS;
+            const activeList = getActiveChapters();
+            if (!query) return activeList;
             const q = query.toLowerCase();
-            return EBOOK_CHAPTERS.filter(ch => 
+            return activeList.filter(ch => 
                 ch.title.toLowerCase().includes(q) || 
                 ch.module.toLowerCase().includes(q) || 
                 ch.content.toLowerCase().includes(q)
@@ -570,17 +684,54 @@ Clique em "Gerar Gancho" para obter um script otimizado para o seu perfil!
             if (sidebar) sidebar.classList.toggle('hidden');
         }}
 
-        const hooks = [
-            "🚨 'Pare de tentar vender produtos físicos se você não quer se estressar com frete. Este e-book de R$ 35,00 me gerou R$ 4.200 em 7 dias.' (Leia a legenda)",
-            "⚠️ 'Este erro simples ao postar Reels está destruindo o seu alcance no Instagram...' (Comente 'GUIA' para receber o PDF completo por R$ 35)",
-            "💡 'A estrutura exata de 3 linhas na bio do Instagram que converte visitantes em clientes fiéis. Salve esse vídeo!'",
-            "🔥 'Se você tem 1 hora por dia livre e acesso à internet, esta é a forma mais barata de construir seu produto digital.'"
-        ];
+        const hooks = {{
+            curiosidade: [
+                "🚨 'Pare de tentar vender produtos físicos se você não quer se estressar com frete. Este e-book de R$ 35,00 me gerou R$ 4.200 em 7 dias.' (Leia a legenda)",
+                "💡 'A estrutura exata de 3 linhas na bio do Instagram que converte visitantes em clientes fiéis. Salve esse vídeo!'",
+                "👀 'O segredo que os grandes criadores não te contam sobre como transformar 100 seguidores em R$ 1.000 no PIX.'"
+            ],
+            controversia: [
+                "⚠️ 'Este erro simples ao postar Reels está destruindo o seu alcance no Instagram...' (Comente 'GUIA' para receber o PDF completo por R$ 35)",
+                "🛑 'Cursos de R$ 2.000 são uma enganação. Tudo o que você precisa para faturar com produtos digitais cabe neste PDF de R$ 35.'",
+                "❌ 'Se você ainda posta fotos normais no feed sem um produto digital na bio, você está jogando dinheiro no lixo.'"
+            ],
+            fomo: [
+                "🔥 'Se você tem 1 hora por dia livre e acesso à internet, esta é a forma mais barata de construir seu produto digital.'",
+                "⌛ 'O mercado de infoprodutos de R$ 35 está explodindo e quem começar esta semana vai dominar o nicho.'",
+                "⚡ 'Baixe o Guia do Criador Digital antes que o valor do pacote completo volte para R$ 97!'"
+            ],
+            venda: [
+                "💰 'Montei um Mega Pack com 31 modelos de produtos digitais + Guia completo por apenas R$ 35,00. Clique no link da bio!'",
+                "📲 'Comente MEGAPACK para receber o link com desconto exclusivo do e-book + bônus de aquecimento orgânico por R$ 35.'",
+                "🚀 'Transforme seu perfil do Instagram em uma máquina de vendas automática por apenas R$ 35,00 à vista no PIX.'"
+            ]
+        }};
 
         function generateHook() {{
-            const randomHook = hooks[Math.floor(Math.random() * hooks.length)];
+            const select = document.getElementById('niche-select');
+            const cat = select ? select.value : 'curiosidade';
+            const catHooks = hooks[cat] || hooks.curiosidade;
+            const randomHook = catHooks[Math.floor(Math.random() * catHooks.length)];
             const output = document.getElementById('hook-output');
             if (output) output.innerText = randomHook;
+        }}
+
+        function copyHookToClipboard() {{
+            const output = document.getElementById('hook-output');
+            const btn = document.getElementById('btn-copy-hook');
+            if (!output) return;
+            const text = output.innerText;
+            navigator.clipboard.writeText(text).then(() => {{
+                if (btn) {{
+                    btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Copiado!`;
+                    setTimeout(() => {{
+                        btn.innerHTML = `<i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Script`;
+                        safeCreateIcons();
+                    }}, 2000);
+                }}
+            }}).catch(err => {{
+                console.error('Erro ao copiar text: ', err);
+            }});
         }}
     </script>
 </body>
@@ -591,4 +742,4 @@ index_out_path = os.path.join(dir_path, "index.html")
 with open(index_out_path, "w", encoding="utf-8") as f:
     f.write(index_html_content)
 
-print("Updated index.html with interactive ebook reader!")
+print("SUCCESS: Regenerated build_interactive_index.py and index.html!")
