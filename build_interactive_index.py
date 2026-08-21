@@ -268,20 +268,39 @@ index_html_content = f"""<!DOCTYPE html>
 
         <!-- TAB 2: FULL PDF EMBED VIEWER -->
         <section id="sec-pdf" class="tab-content hidden space-y-5">
-            <div class="glass-panel p-6 rounded-2xl flex items-center justify-between gap-4">
+            <div class="glass-panel p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <h2 class="font-heading text-xl font-bold text-white flex items-center gap-2">
-                        <i data-lucide="file-text" class="w-5 h-5 text-indigo-400"></i> Visualizador do PDF Master (72 Páginas)
+                        <i data-lucide="file-text" class="w-5 h-5 text-indigo-400"></i> Visualizador do PDF Master (80 Páginas)
                     </h2>
-                    <p class="text-xs text-slate-400">Versão formatada para leitura, impressão e download em alta definição.</p>
+                    <p class="text-xs text-slate-400">Versão completa formatada para leitura, impressão e navegação HD em todos os dispositivos.</p>
                 </div>
-                <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" download class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
-                    <i data-lucide="download" class="w-4 h-4"></i> Baixar Arquivo PDF (2.0 MB)
-                </a>
+                <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+                    <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" target="_blank" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
+                        <i data-lucide="external-link" class="w-4 h-4"></i> Abrir em Nova Aba
+                    </a>
+                    <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" download class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
+                        <i data-lucide="download" class="w-4 h-4"></i> Baixar PDF (2.4 MB)
+                    </a>
+                </div>
             </div>
 
-            <div class="glass-panel rounded-2xl overflow-hidden h-[750px] border border-slate-800">
-                <iframe src="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" class="w-full h-full border-0"></iframe>
+            <div class="glass-panel rounded-2xl overflow-hidden h-[800px] border border-slate-800 relative bg-slate-950 flex flex-col">
+                <object data="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf#toolbar=1&navpanes=1&scrollbar=1" type="application/pdf" class="w-full h-full min-h-[750px]">
+                    <embed src="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf#toolbar=1&navpanes=1" type="application/pdf" class="w-full h-full min-h-[750px]" />
+                    <div class="p-8 text-center text-slate-300 space-y-4 my-auto">
+                        <div class="inline-flex p-4 rounded-2xl bg-indigo-500/10 text-indigo-400 mb-2">
+                            <i data-lucide="file-text" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Visualização de PDF Integrada</h3>
+                        <p class="text-xs text-slate-400 max-w-md mx-auto">Para visualizar todas as 80 páginas diretamente ou salvar em seu dispositivo, clique no botão abaixo:</p>
+                        <div class="flex items-center justify-center gap-3 pt-2">
+                            <a href="./GUIA_MEGAPACK_CRIADOR_DIGITAL_COMPLETO.pdf" target="_blank" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-6 py-3 rounded-xl font-bold text-xs transition-all shadow-lg flex items-center gap-2">
+                                <i data-lucide="book-open" class="w-4 h-4"></i> Abrir PDF Completo (80 Páginas)
+                            </a>
+                        </div>
+                    </div>
+                </object>
             </div>
         </section>
 
